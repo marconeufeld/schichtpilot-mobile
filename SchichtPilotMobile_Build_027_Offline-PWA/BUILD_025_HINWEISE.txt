@@ -1,0 +1,14 @@
+SchichtPilot Mobile – Build 027
+
+Neu:
+- Arbeit, Urlaub, Krank und Feiertag können im bestehenden Eingabeformular gewählt werden.
+- Urlaub/Krank/Feiertag werden mit 7,5 Stunden beziehungsweise 123,75 € brutto pro Tag berechnet.
+- Abwesenheitsstunden werden nicht zu den Arbeitsstunden addiert.
+- Keine Nachtstunden und kein Nachtzuschlag für Abwesenheiten.
+- Kein Fahrgeld für Abwesenheiten.
+- Abwesenheitsbrutto fließt in Brutto-, Netto- und Auszahlungsprognose ein.
+
+Unverändert:
+- Keine zusätzliche Seite oder große neue Auswertung.
+- Datenschutz-Ausblendung der Lohnwerte.
+- Bestehende Arbeitsschichten und lokale Datenstruktur.

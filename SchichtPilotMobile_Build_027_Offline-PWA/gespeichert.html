@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="application-name" content="SchichtPilot Mobile">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SchichtPilot">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="color-scheme" content="dark">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/favicon-64.png" type="image/png">
+  <title>Gespeichert · SchichtPilot Mobile</title>
+  <link rel="stylesheet" href="css/main.css?v=027">
+</head>
+<body>
+  <main class="app saved-page">
+    <section class="saved-card">
+      <div class="saved-icon">✓</div>
+      <h2>Schicht gespeichert</h2>
+      <p id="savedText">Die Schicht wurde dauerhaft auf diesem Gerät gespeichert.</p>
+
+      <a class="save-button link-button" href="betriebsstundenliste.html?v=027">Betriebsstundenliste öffnen</a>
+      <a class="text-button" href="index.html?v=027">Zur Startseite</a>
+    </section>
+  </main>
+  <script src="js/storage.js?v=027"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const updated = params.get("updated") === "1";
+    const count = SchichtPilotStorage.readAll().length;
+
+    if (updated) {
+      document.querySelector(".saved-card h2").textContent = "Änderungen gespeichert";
+      document.getElementById("savedText").textContent =
+        "Die bestehende Schicht wurde aktualisiert. Es wurde keine zweite Schicht angelegt.";
+    } else {
+      document.getElementById("savedText").textContent =
+        count === 1
+          ? "1 Schicht wurde dauerhaft auf diesem Gerät gespeichert."
+          : count + " Schichten sind dauerhaft auf diesem Gerät gespeichert.";
+    }
+  </script>
+  <script src="js/pwa.js?v=027"></script>
+</body>
+</html>

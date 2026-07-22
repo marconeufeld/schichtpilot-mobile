@@ -1,0 +1,17 @@
+SchichtPilot Mobile – Build 027
+Stabilitäts- und Fehlerprüfung
+
+Behoben:
+- Veraltete Cache-/Navigationsversionen v=009 und v=010 auf v=027 vereinheitlicht.
+- Zeitwerte werden jetzt vollständig validiert (00:00 bis 23:59).
+- Doppeltippen auf „Speichern“ kann keine doppelten Schichten mehr erzeugen.
+- Speicherfehler werden auf der Vorschauseite angezeigt statt unbemerkt weiterzuleiten.
+- Vor Änderungen wird automatisch eine Sicherung der bisherigen Schichtdaten angelegt.
+- Beschädigte Hauptdaten werden nach Möglichkeit aus der Sicherung wiederhergestellt.
+- Blockiertes sessionStorage in Safari unterbricht den Kalender nicht mehr.
+
+Nicht verändert:
+- Bedienoberfläche
+- vorhandene Anzeigen
+- Stunden- und Lohnberechnung
+- lokale Datenstruktur und vorhandene Schichten
