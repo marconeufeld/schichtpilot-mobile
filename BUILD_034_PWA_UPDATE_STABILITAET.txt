@@ -1,0 +1,18 @@
+SchichtPilot Mobile 1.0 RC – Build 034 PWA-Update-Stabilität
+
+Behoben und verbessert:
+- Interne PWA-Buildnummer von 027 auf 034 korrigiert.
+- Service Worker wird mit updateViaCache: none registriert.
+- Bei jedem App-Start wird nach einer neuen Version gesucht.
+- Weitere Prüfung bei Rückkehr zur App und einmal pro Stunde.
+- Sichtbarer Hinweis: „Neue Version verfügbar – Jetzt aktualisieren“.
+- Updatebutton aktiviert den wartenden Service Worker sicher.
+- Nach Aktivierung wird die App einmal automatisch neu geladen.
+- Alte SchichtPilot-Caches werden bei Aktivierung gelöscht.
+- Der neue Service Worker übernimmt alle geöffneten App-Seiten.
+- pwa.js und Manifest werden bevorzugt aus dem Netzwerk geladen.
+- Lokale Schichtdaten in localStorage werden durch Updates nicht gelöscht.
+
+Wichtig:
+Build 034 stabilisiert den Updateprozess. Eine Neuinstallation sollte bei
+zukünftigen Builds normalerweise nicht mehr notwendig sein.

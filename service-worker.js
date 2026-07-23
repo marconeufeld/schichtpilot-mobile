@@ -1,4 +1,4 @@
-const CACHE_NAME = "schichtpilot-mobile-build-033";
+const CACHE_NAME = "schichtpilot-mobile-build-034";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -33,7 +33,6 @@ self.addEventListener("install", event => {
     caches
       .open(CACHE_NAME)
       .then(cache => cache.addAll(APP_SHELL))
-      .then(() => self.skipWaiting())
   );
 });
 
@@ -101,11 +100,20 @@ async function handleNavigation(request) {
 }
 
 async function handleAsset(request) {
-  const cached = await cachedResponse(request);
-  if (cached) return cached;
+  const url = new URL(request.url);
+  const updateCritical =
+    url.pathname.endsWith("/js/pwa.js") ||
+    url.pathname.endsWith("/manifest.webmanifest");
+
+  if (!updateCritical) {
+    const cached = await cachedResponse(request);
+    if (cached) return cached;
+  }
 
   try {
-    const networkResponse = await fetch(request);
+    const networkResponse = await fetch(request, {
+      cache: updateCritical ? "no-store" : "default"
+    });
 
     if (
       networkResponse &&
@@ -118,12 +126,31 @@ async function handleAsset(request) {
 
     return networkResponse;
   } catch {
-    return new Response("", {
-      status: 504,
-      statusText: "Offline"
-    });
+    return (
+      (await cachedResponse(request)) ||
+      new Response("", {
+        status: 504,
+        statusText: "Offline"
+      })
+    );
   }
 }
+
+
+self.addEventListener("message", event => {
+  const message = event.data || {};
+
+  if (message.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+
+  if (message.type === "GET_BUILD" && event.source) {
+    event.source.postMessage({
+      type: "SCHICHTPILOT_BUILD",
+      build: "034"
+    });
+  }
+});
 
 self.addEventListener("fetch", event => {
   const request = event.request;

@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 033: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 034: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 033: erwarteter Netto-Auszahlungsbetrag */
+/* Build 034: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 033: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 034: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1929,7 +1929,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 033 – Workflow Edition */
+/* Build 034 – Workflow Edition */
 .secondary-main-button,
 .secondary-save-button {
   border: 1px solid rgba(169, 147, 255, 0.28);
@@ -2034,7 +2034,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 033: kompakte Statusübersicht im Schichtkalender */
+/* Build 034: kompakte Statusübersicht im Schichtkalender */
 .calendar-status-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2116,7 +2116,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 033: Datensicherung */
+/* Build 034: Datensicherung */
 .backup-page {
   gap: 16px;
   padding-bottom: calc(28px + env(safe-area-inset-bottom));
@@ -2227,7 +2227,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 033: erweiterte Backup-Prüfung */
+/* Build 034: erweiterte Backup-Prüfung */
 .backup-metadata {
   display: grid;
   gap: 8px;
@@ -2274,4 +2274,75 @@ input[type="time"]::-webkit-datetime-edit {
   border-color: rgba(251, 191, 36, 0.35);
   background: rgba(251, 191, 36, 0.11);
   color: #fde68a;
+}
+
+
+/* Build 034: sichtbare und sichere PWA-Aktualisierung */
+.pwa-update-banner {
+  position: fixed;
+  z-index: 10000;
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(14px, calc(env(safe-area-inset-bottom) + 10px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid rgba(96, 165, 250, 0.45);
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.97);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.pwa-update-banner[hidden] {
+  display: none;
+}
+
+.pwa-update-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.pwa-update-copy strong {
+  font-size: 14px;
+}
+
+.pwa-update-copy span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.pwa-update-banner button {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 13px;
+  background: var(--accent);
+  color: #07111f;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.pwa-update-banner.is-updating button {
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+@media (max-width: 430px) {
+  .pwa-update-banner {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pwa-update-banner button {
+    width: 100%;
+  }
 }

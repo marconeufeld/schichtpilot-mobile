@@ -328,7 +328,7 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 033. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 034. Trotzdem fortfahren?`
     );
   }
 
