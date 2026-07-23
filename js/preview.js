@@ -83,8 +83,8 @@ saveButton.addEventListener("click", () => {
     SchichtPilotStorage.clearDraft();
     SchichtPilotStorage.setEditId(null);
     window.location.href = editingExisting
-      ? "gespeichert.html?v=029&updated=1"
-      : "gespeichert.html?v=029";
+      ? "gespeichert.html?v=030&updated=1"
+      : "gespeichert.html?v=030";
   } catch (error) {
     previewMessage.textContent =
       error instanceof Error

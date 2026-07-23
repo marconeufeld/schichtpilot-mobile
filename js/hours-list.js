@@ -47,7 +47,7 @@ function currentMonthKey() {
 function editShift(id) {
   SchichtPilotStorage.setEditId(id);
   SchichtPilotStorage.clearDraft();
-  window.location.href = "neue-schicht.html?v=029&mode=edit";
+  window.location.href = "neue-schicht.html?v=030&mode=edit";
 }
 
 function openDeleteDialog(id) {

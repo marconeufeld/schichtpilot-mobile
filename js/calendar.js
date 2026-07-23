@@ -5,6 +5,10 @@ const monthShiftSummary = document.getElementById("monthShiftSummary");
 const monthHoursSummary = document.getElementById("monthHoursSummary");
 const monthNightSummary = document.getElementById("monthNightSummary");
 const monthAverageSummary = document.getElementById("monthAverageSummary");
+const monthWorkCount = document.getElementById("monthWorkCount");
+const monthVacationCount = document.getElementById("monthVacationCount");
+const monthSickCount = document.getElementById("monthSickCount");
+const monthHolidayCount = document.getElementById("monthHolidayCount");
 const earningsHiddenState = document.getElementById("earningsHiddenState");
 const earningsValues = document.getElementById("earningsValues");
 const earningsRevealButton = document.getElementById("earningsRevealButton");
@@ -129,6 +133,20 @@ function statusLabel(status) {
   return "Arbeit";
 }
 
+
+function countMonthStatuses(shifts) {
+  return shifts.reduce((counts, shift) => {
+    const status = normalizeStatus(shift.status);
+    counts[status] += 1;
+    return counts;
+  }, {
+    work: 0,
+    vacation: 0,
+    sick: 0,
+    holiday: 0
+  });
+}
+
 function dayStatusClasses(shifts) {
   return [...new Set(shifts.map(shift => normalizeStatus(shift.status)))];
 }
@@ -244,7 +262,7 @@ function monthTransition(direction) {
 
 function openShiftDetails(id) {
   window.location.href =
-    `betriebsstundenliste.html?v=029&shift=${encodeURIComponent(id)}`;
+    `betriebsstundenliste.html?v=030&shift=${encodeURIComponent(id)}`;
 }
 
 function renderSelectedDay(shiftsByDate) {
@@ -262,7 +280,7 @@ function renderSelectedDay(shiftsByDate) {
   selectedShiftList.innerHTML = "";
 
   newShiftForDayButton.href =
-    `neue-schicht.html?v=029&mode=new&date=${encodeURIComponent(selectedDateKey)}`;
+    `neue-schicht.html?v=030&mode=new&date=${encodeURIComponent(selectedDateKey)}`;
 
   if (!shifts.length) {
     const empty = document.createElement("div");
@@ -359,6 +377,7 @@ function renderCalendar() {
   const monthShifts = allShifts.filter(shift => shift.date.startsWith(monthPrefix));
   const monthShiftCount = monthShifts.length;
   const monthTotals = calculateMonthTotals(monthShifts);
+  const monthStatusCounts = countMonthStatuses(monthShifts);
 
   calendarSubtitle.textContent =
     monthShiftCount === 0
@@ -375,6 +394,11 @@ function renderCalendar() {
       monthTotals.workShifts ? monthTotals.paid / monthTotals.workShifts : 0,
       true
     );
+
+  monthWorkCount.textContent = String(monthStatusCounts.work);
+  monthVacationCount.textContent = String(monthStatusCounts.vacation);
+  monthSickCount.textContent = String(monthStatusCounts.sick);
+  monthHolidayCount.textContent = String(monthStatusCounts.holiday);
 
   const earnings = calculateEarnings(monthTotals);
   monthEarningsGross.textContent = euroText(earnings.grossTotal);

@@ -176,7 +176,7 @@ document.getElementById("shiftForm").addEventListener("submit", event => {
       comment: shiftComment.value.trim()
     });
 
-    window.location.href = "vorschau.html?v=029";
+    window.location.href = "vorschau.html?v=030";
   } catch {
     formMessage.textContent = "Die Eingaben konnten nicht für die Vorschau gespeichert werden.";
   }

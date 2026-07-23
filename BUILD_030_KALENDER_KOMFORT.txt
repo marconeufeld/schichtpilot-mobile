@@ -1,0 +1,14 @@
+SchichtPilot Mobile 1.0 RC – Build 030 Kalender & Komfort
+
+Neu:
+- Kompakte Monatsübersicht nach Status:
+  Arbeit, Urlaub, Krank und Feiertag.
+- Statusfarben sind im Kalender und in der neuen Übersicht einheitlich.
+- Bei einem leeren Kalendertag heißt der direkte Button jetzt
+  „Neue Schicht erstellen“.
+
+Unverändert:
+- Kalender öffnet bei vorhandenen Einträgen zuerst die Detailkarte.
+- Speichern und Kommentarfeld aus Build 029 bleiben erhalten.
+- Keine Filter-, Such- oder Duplizierfunktionen.
+- Noch keine Datensicherung oder Synchronisierung; diese ist für Build 031 vorgesehen.

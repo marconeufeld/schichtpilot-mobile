@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 029: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 030: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 029: erwarteter Netto-Auszahlungsbetrag */
+/* Build 030: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 029: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 030: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1929,7 +1929,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 029 – Workflow Edition */
+/* Build 030 – Workflow Edition */
 .secondary-main-button,
 .secondary-save-button {
   border: 1px solid rgba(169, 147, 255, 0.28);
@@ -2031,4 +2031,86 @@ input[type="time"]::-webkit-datetime-edit {
 
 .exit-icon {
   background: rgba(134, 239, 172, 0.12);
+}
+
+
+/* Build 030: kompakte Statusübersicht im Schichtkalender */
+.calendar-status-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin: 12px 0 2px;
+}
+
+.calendar-status-summary-item {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "symbol count"
+    "label label";
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+  row-gap: 2px;
+  padding: 9px 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.035);
+  text-align: center;
+}
+
+.calendar-status-symbol {
+  grid-area: symbol;
+  justify-self: end;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.calendar-status-summary-item strong {
+  grid-area: count;
+  justify-self: start;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.calendar-status-summary-item small {
+  grid-area: label;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendar-status-summary-item.status-work .calendar-status-symbol {
+  color: var(--status-work);
+}
+
+.calendar-status-summary-item.status-vacation .calendar-status-symbol {
+  color: var(--status-vacation);
+}
+
+.calendar-status-summary-item.status-sick .calendar-status-symbol {
+  color: var(--status-sick);
+}
+
+.calendar-status-summary-item.status-holiday .calendar-status-symbol {
+  color: var(--status-holiday);
+}
+
+@media (max-width: 370px) {
+  .calendar-status-summary {
+    gap: 5px;
+  }
+
+  .calendar-status-summary-item {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .calendar-status-summary-item small {
+    font-size: 10px;
+  }
 }

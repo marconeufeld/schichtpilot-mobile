@@ -10,7 +10,7 @@
     }
 
     window.setTimeout(() => {
-      window.location.replace("beenden.html?v=029");
+      window.location.replace("beenden.html?v=030");
     }, 80);
   }
 
