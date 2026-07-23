@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 035: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034: erwarteter Netto-Auszahlungsbetrag */
+/* Build 035: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 035: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1929,7 +1929,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034 – Workflow Edition */
+/* Build 035 – Workflow Edition */
 .secondary-main-button,
 .secondary-save-button {
   border: 1px solid rgba(169, 147, 255, 0.28);
@@ -2034,7 +2034,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034: kompakte Statusübersicht im Schichtkalender */
+/* Build 035: kompakte Statusübersicht im Schichtkalender */
 .calendar-status-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2116,7 +2116,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034: Datensicherung */
+/* Build 035: Datensicherung */
 .backup-page {
   gap: 16px;
   padding-bottom: calc(28px + env(safe-area-inset-bottom));
@@ -2227,7 +2227,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034: erweiterte Backup-Prüfung */
+/* Build 035: erweiterte Backup-Prüfung */
 .backup-metadata {
   display: grid;
   gap: 8px;
@@ -2277,7 +2277,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 034: sichtbare und sichere PWA-Aktualisierung */
+/* Build 035: sichtbare und sichere PWA-Aktualisierung */
 .pwa-update-banner {
   position: fixed;
   z-index: 10000;
@@ -2345,4 +2345,34 @@ input[type="time"]::-webkit-datetime-edit {
   .pwa-update-banner button {
     width: 100%;
   }
+}
+
+
+/* Build 035: transparente Importanalyse und Dublettenschutz */
+.merge-analysis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.merge-analysis > div {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel-soft);
+}
+
+.merge-analysis span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.merge-analysis strong {
+  display: block;
+  color: var(--text);
+  font-size: 21px;
 }

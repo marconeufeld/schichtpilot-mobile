@@ -1,4 +1,4 @@
-SchichtPilot Mobile – Build 034
+SchichtPilot Mobile – Build 035
 
 Neu:
 - Arbeit, Urlaub, Krank und Feiertag können im bestehenden Eingabeformular gewählt werden.

@@ -3,7 +3,7 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const CURRENT_BUILD = 33;
+  const CURRENT_BUILD = 35;
   const FILE_NAME = "SchichtPilot_Backup.spb";
   const SAFETY_FILE_NAME = "SchichtPilot_Backup_vor_Import.spb";
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -250,6 +250,7 @@
   function showPreview(file, shifts, meta) {
     pendingImport = shifts;
     pendingMeta = meta;
+    const mergeAnalysis = window.SchichtPilotStorage.analyzeMerge(shifts);
 
     const backupBuild = parseBuildNumber(meta.build);
     const isNewerBuild = backupBuild != null && backupBuild > CURRENT_BUILD;
@@ -260,6 +261,24 @@
     importPlatform.textContent = String(meta.platform || "Unbekannt");
     importCount.textContent = String(shifts.length);
     importFormatVersion.textContent = String(meta.formatVersion ?? 1);
+    document.getElementById("mergeNewCount").textContent = String(mergeAnalysis.added);
+    document.getElementById("mergeExistingCount").textContent = String(mergeAnalysis.identical);
+    document.getElementById("mergeUpdatedCount").textContent = String(mergeAnalysis.updated);
+    document.getElementById("mergeFinalCount").textContent = String(mergeAnalysis.finalCount);
+
+    const duplicateWarning = document.getElementById("duplicateWarning");
+    const duplicateParts = [];
+    if (mergeAnalysis.importDuplicates > 0) {
+      duplicateParts.push(`${mergeAnalysis.importDuplicates} doppelte Einträge im Backup`);
+    }
+    if (mergeAnalysis.existingDuplicates > 0) {
+      duplicateParts.push(`${mergeAnalysis.existingDuplicates} bereits doppelte Einträge in der App`);
+    }
+    duplicateWarning.hidden = duplicateParts.length === 0;
+    duplicateWarning.textContent = duplicateParts.length
+      ? `Hinweis: ${duplicateParts.join(" und ")} werden beim Zusammenführen bereinigt.`
+      : "";
+
     versionWarning.hidden = !isNewerBuild;
     importPreview.hidden = false;
 
@@ -328,26 +347,43 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 034. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 035. Trotzdem fortfahren?`
     );
   }
 
   function importMerged() {
     if (!pendingImport || !confirmNewerBuildIfNeeded()) return;
 
-    const before = window.SchichtPilotStorage.readAll().length;
+    const analysis = window.SchichtPilotStorage.analyzeMerge(pendingImport);
 
     if (!window.confirm(
-      "Die Einträge aus der Sicherung werden mit deinen vorhandenen Daten zusammengeführt. Fortfahren?"
+      `Dublettenfrei zusammenführen?\n\n` +
+      `${analysis.added} neue Schichten\n` +
+      `${analysis.identical} bereits vorhandene Schichten\n` +
+      `${analysis.updated} Schichten mit abweichenden Details\n` +
+      `Endbestand: ${analysis.finalCount}`
     )) {
       return;
     }
 
     try {
+      let safetyCount = null;
+      if (downloadSafetyCopy.checked) {
+        safetyCount = downloadCurrentDataAsSafetyCopy();
+      }
+
       const saved = window.SchichtPilotStorage.mergeAll(pendingImport);
       updateCount();
+
+      const safetyText = safetyCount == null
+        ? ""
+        : ` Sicherheitskopie mit ${safetyCount} Einträgen wurde heruntergeladen.`;
+
       showMessage(
-        `Import abgeschlossen. Vorher: ${before}, jetzt: ${saved.length} Einträge.`
+        `Zusammenführen abgeschlossen: ${analysis.added} neu, ` +
+        `${analysis.identical} bereits vorhanden, ${analysis.updated} aktualisiert. ` +
+        `Jetzt sind ${saved.length} eindeutige Einträge gespeichert.${safetyText}`,
+        "success"
       );
     } catch (error) {
       showMessage(

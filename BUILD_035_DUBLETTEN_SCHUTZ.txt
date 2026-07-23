@@ -1,0 +1,8 @@
+SchichtPilot Mobile – Build 035 Dubletten-Schutz
+
+- Zusammenführen vergleicht Schichten über Datum, Status, Beginn und Ende.
+- Unterschiedliche Desktop-/Mobile-IDs erzeugen keine Doppelungen mehr.
+- Importvorschau zeigt neu, vorhanden, abweichend und Endbestand.
+- Bereits vorhandene Dubletten werden beim Zusammenführen bereinigt.
+- Sicherheitskopie wird nun auch vor „Zusammenführen“ heruntergeladen.
+- Update-Mechanismus aus Build 034 bleibt erhalten.

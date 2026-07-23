@@ -1,6 +1,6 @@
-SchichtPilot Mobile 1.0 RC – Build 034
+SchichtPilot Mobile 1.0 RC – Build 035
 
-Build 034 ist als installierbare Offline-PWA vorbereitet.
+Build 035 ist als installierbare Offline-PWA vorbereitet.
 
 Enthalten:
 - Web-App-Manifest für die Installation auf dem iPhone.
@@ -18,4 +18,4 @@ Wichtig:
 - Danach in Safari: Teilen > Zum Home-Bildschirm hinzufügen > Als Web-App öffnen.
 - Erst nach dem ersten vollständigen Laden ist der Offline-Test sinnvoll.
 - Das Löschen der Web-App beziehungsweise der Safari-Websitedaten kann lokale Schichten löschen.
-- Es gibt in Build 034 noch keine Synchronisation und kein Cloud-Backup.
+- Es gibt in Build 035 noch keine Synchronisation und kein Cloud-Backup.

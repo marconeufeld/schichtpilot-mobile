@@ -341,32 +341,120 @@ window.SchichtPilotStorage = (() => {
     return writeAll(shifts);
   }
 
-  function mergeAll(importedShifts) {
+  function normalizeMergeText(value) {
+    return String(value ?? "").trim().replace(/\s+/g, " ").toLowerCase();
+  }
+
+  function shiftMergeKey(shift) {
+    const status = ALLOWED_STATUSES.has(shift.status) ? shift.status : "Arbeit";
+    if (status !== "Arbeit") {
+      return [shift.date, status].join("|");
+    }
+
+    return [
+      shift.date,
+      status,
+      shift.start || "00:00",
+      shift.end || "00:00",
+    ].join("|");
+  }
+
+  function shiftContentSignature(shift) {
+    return [
+      shiftMergeKey(shift),
+      shift.pauseStart || "00:00",
+      shift.pauseEnd || "00:00",
+      normalizeMergeText(shift.comment),
+    ].join("|");
+  }
+
+  function shiftTimestamp(shift) {
+    return Date.parse(shift.updatedAt) || Date.parse(shift.createdAt) || 0;
+  }
+
+  function chooseNewerShift(first, second) {
+    const firstTime = shiftTimestamp(first);
+    const secondTime = shiftTimestamp(second);
+
+    if (secondTime > firstTime) return second;
+    if (firstTime > secondTime) return first;
+
+    const firstComment = String(first.comment || "").trim().length;
+    const secondComment = String(second.comment || "").trim().length;
+    return secondComment > firstComment ? second : first;
+  }
+
+  function analyzeMerge(importedShifts) {
     if (!Array.isArray(importedShifts)) {
       throw new Error("Die Sicherungsdatei enthält keine gültige Schichtliste.");
     }
 
     const existing = readAll();
     const imported = sanitizeShiftList(importedShifts).shifts;
-    const mergedById = new Map(existing.map(shift => [shift.id, shift]));
+    const mergedByKey = new Map();
+    let existingDuplicates = 0;
 
-    imported.forEach(importedShift => {
-      const existingShift = mergedById.get(importedShift.id);
-
-      if (!existingShift) {
-        mergedById.set(importedShift.id, importedShift);
-        return;
-      }
-
-      const importedTime = Date.parse(importedShift.updatedAt) || 0;
-      const existingTime = Date.parse(existingShift.updatedAt) || 0;
-
-      if (importedTime >= existingTime) {
-        mergedById.set(importedShift.id, importedShift);
+    existing.forEach(shift => {
+      const key = shiftMergeKey(shift);
+      if (mergedByKey.has(key)) {
+        existingDuplicates += 1;
+        mergedByKey.set(key, chooseNewerShift(mergedByKey.get(key), shift));
+      } else {
+        mergedByKey.set(key, shift);
       }
     });
 
-    return writeAll(Array.from(mergedById.values()));
+    let added = 0;
+    let identical = 0;
+    let updated = 0;
+    let importDuplicates = 0;
+    const importKeys = new Set();
+
+    imported.forEach(importedShift => {
+      const key = shiftMergeKey(importedShift);
+
+      if (importKeys.has(key)) {
+        importDuplicates += 1;
+      }
+      importKeys.add(key);
+
+      const existingShift = mergedByKey.get(key);
+      if (!existingShift) {
+        added += 1;
+        mergedByKey.set(key, importedShift);
+        return;
+      }
+
+      if (shiftContentSignature(existingShift) === shiftContentSignature(importedShift)) {
+        identical += 1;
+        return;
+      }
+
+      updated += 1;
+      const selected = chooseNewerShift(existingShift, importedShift);
+
+      // Die bestehende ID bleibt erhalten, damit bestehende Verknüpfungen stabil bleiben.
+      mergedByKey.set(key, {
+        ...selected,
+        id: existingShift.id,
+        createdAt: existingShift.createdAt || selected.createdAt,
+      });
+    });
+
+    return {
+      added,
+      identical,
+      updated,
+      importDuplicates,
+      existingDuplicates,
+      finalCount: mergedByKey.size,
+      merged: Array.from(mergedByKey.values()),
+    };
+  }
+
+  function mergeAll(importedShifts) {
+    const analysis = analyzeMerge(importedShifts);
+    return writeAll(analysis.merged);
   }
 
   function save(shift) {

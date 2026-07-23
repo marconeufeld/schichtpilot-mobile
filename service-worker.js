@@ -1,4 +1,4 @@
-const CACHE_NAME = "schichtpilot-mobile-build-034";
+const CACHE_NAME = "schichtpilot-mobile-build-035";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -147,7 +147,7 @@ self.addEventListener("message", event => {
   if (message.type === "GET_BUILD" && event.source) {
     event.source.postMessage({
       type: "SCHICHTPILOT_BUILD",
-      build: "034"
+      build: "035"
     });
   }
 });
