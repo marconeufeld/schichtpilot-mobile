@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 028: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 029: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 028: erwarteter Netto-Auszahlungsbetrag */
+/* Build 029: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 028: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 029: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1929,7 +1929,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 028 – Workflow Edition */
+/* Build 029 – Workflow Edition */
 .secondary-main-button,
 .secondary-save-button {
   border: 1px solid rgba(169, 147, 255, 0.28);

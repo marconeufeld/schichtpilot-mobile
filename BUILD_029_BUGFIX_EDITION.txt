@@ -1,0 +1,11 @@
+SchichtPilot Mobile 1.0 RC – Build 029 Bugfix Edition
+
+Behoben:
+- Kritischer Speicherfehler „Can't find variable: raw“.
+- Neue Schichten können wieder gespeichert werden.
+- Kommentare werden weiterhin korrekt mitgespeichert.
+- Arbeit, Urlaub, Krank und Feiertag bleiben kompatibel.
+- Alle Workflow-Erweiterungen aus Build 028 bleiben erhalten.
+- Offline-Cache und Dateiversionen wurden auf Build 029 aktualisiert.
+
+Build 029 enthält bewusst keine zusätzlichen Funktionen.

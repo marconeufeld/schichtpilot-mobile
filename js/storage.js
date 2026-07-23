@@ -339,10 +339,6 @@ window.SchichtPilotStorage = (() => {
     }
 
     const shifts = readAll();
-    const comment = typeof raw.comment === "string"
-      ? raw.comment.trim().slice(0, 1000)
-      : "";
-
     const now = new Date().toISOString();
     const requestedId =
       typeof shift.id === "string" && shift.id.trim() ? shift.id.trim() : null;
