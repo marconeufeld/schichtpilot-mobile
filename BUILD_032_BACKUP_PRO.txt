@@ -1,0 +1,17 @@
+SchichtPilot Mobile 1.0 RC – Build 032 Backup Pro
+
+Neu:
+- Detaillierte Vorschau vor dem Import:
+  Erstellungsdatum, Build, Plattform, Anzahl und Formatversion.
+- Warnung bei Backups aus einer neueren SchichtPilot-Version.
+- Erweiterte Prüfung auf:
+  beschädigte JSON-Dateien, falsches Format, fehlende IDs,
+  doppelte IDs, ungültige Datums- und Zeitwerte, unbekannte Status
+  und ungültige Zeitstempel.
+- Optionale automatische Sicherheitskopie vor vollständigem Ersetzen.
+- Sicherheitskopie: SchichtPilot_Backup_vor_Import.spb.
+- Manuelles Backup bleibt: SchichtPilot_Backup.spb.
+
+Noch nicht enthalten:
+- automatische iCloud-Synchronisierung
+- Desktop-Import und Desktop-Export

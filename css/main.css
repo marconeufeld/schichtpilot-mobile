@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 031: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 032: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 031: erwarteter Netto-Auszahlungsbetrag */
+/* Build 032: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 031: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 032: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1929,7 +1929,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 031 – Workflow Edition */
+/* Build 032 – Workflow Edition */
 .secondary-main-button,
 .secondary-save-button {
   border: 1px solid rgba(169, 147, 255, 0.28);
@@ -2034,7 +2034,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 031: kompakte Statusübersicht im Schichtkalender */
+/* Build 032: kompakte Statusübersicht im Schichtkalender */
 .calendar-status-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2116,7 +2116,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 031: Datensicherung */
+/* Build 032: Datensicherung */
 .backup-page {
   gap: 16px;
   padding-bottom: calc(28px + env(safe-area-inset-bottom));
@@ -2224,4 +2224,54 @@ input[type="time"]::-webkit-datetime-edit {
   clip: rect(0 0 0 0) !important;
   clip-path: inset(50%) !important;
   white-space: nowrap !important;
+}
+
+
+/* Build 032: erweiterte Backup-Prüfung */
+.backup-metadata {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.backup-metadata .backup-stat {
+  margin: 0;
+}
+
+.backup-warning {
+  margin: 0 0 14px;
+  padding: 13px 14px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 14px;
+  background: rgba(251, 191, 36, 0.11);
+  color: #fde68a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.backup-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.035);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.backup-option input {
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  flex: 0 0 auto;
+}
+
+.backup-message.warning {
+  border-color: rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.11);
+  color: #fde68a;
 }
