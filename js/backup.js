@@ -3,7 +3,7 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const CURRENT_BUILD = 32;
+  const CURRENT_BUILD = 33;
   const FILE_NAME = "SchichtPilot_Backup.spb";
   const SAFETY_FILE_NAME = "SchichtPilot_Backup_vor_Import.spb";
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -54,7 +54,7 @@
       application: {
         name: "SchichtPilot",
         platform: "mobile",
-        build: "032"
+        build: "033"
       },
       purpose: filePurpose,
       data: {
@@ -66,7 +66,7 @@
   function triggerDownload(payload, fileName) {
     const serialized = JSON.stringify(payload, null, 2);
     const blob = new Blob([serialized], {
-      type: "application/json;charset=utf-8"
+      type: "application/octet-stream"
     });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -280,8 +280,17 @@
 
     if (!file) return;
 
-    if (!file.name.toLowerCase().endsWith(".spb")) {
-      showMessage("Bitte wähle eine Datei mit der Endung .spb aus.", "error");
+    const lowerName = file.name.toLowerCase();
+    const supportedName =
+      lowerName.endsWith(".spb") ||
+      lowerName.endsWith(".spb.json") ||
+      lowerName.endsWith(".json");
+
+    if (!supportedName) {
+      showMessage(
+        "Bitte wähle eine SchichtPilot-Sicherung mit .spb, .spb.json oder .json aus.",
+        "error"
+      );
       backupFile.value = "";
       return;
     }
@@ -319,7 +328,7 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 032. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 033. Trotzdem fortfahren?`
     );
   }
 

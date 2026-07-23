@@ -262,7 +262,7 @@ function monthTransition(direction) {
 
 function openShiftDetails(id) {
   window.location.href =
-    `betriebsstundenliste.html?v=032&shift=${encodeURIComponent(id)}`;
+    `betriebsstundenliste.html?v=033&shift=${encodeURIComponent(id)}`;
 }
 
 function renderSelectedDay(shiftsByDate) {
@@ -280,7 +280,7 @@ function renderSelectedDay(shiftsByDate) {
   selectedShiftList.innerHTML = "";
 
   newShiftForDayButton.href =
-    `neue-schicht.html?v=032&mode=new&date=${encodeURIComponent(selectedDateKey)}`;
+    `neue-schicht.html?v=033&mode=new&date=${encodeURIComponent(selectedDateKey)}`;
 
   if (!shifts.length) {
     const empty = document.createElement("div");

@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 032: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 033: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 032: erwarteter Netto-Auszahlungsbetrag */
+/* Build 033: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 032: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 033: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1929,7 +1929,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 032 – Workflow Edition */
+/* Build 033 – Workflow Edition */
 .secondary-main-button,
 .secondary-save-button {
   border: 1px solid rgba(169, 147, 255, 0.28);
@@ -2034,7 +2034,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 032: kompakte Statusübersicht im Schichtkalender */
+/* Build 033: kompakte Statusübersicht im Schichtkalender */
 .calendar-status-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2116,7 +2116,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 032: Datensicherung */
+/* Build 033: Datensicherung */
 .backup-page {
   gap: 16px;
   padding-bottom: calc(28px + env(safe-area-inset-bottom));
@@ -2227,7 +2227,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 032: erweiterte Backup-Prüfung */
+/* Build 033: erweiterte Backup-Prüfung */
 .backup-metadata {
   display: grid;
   gap: 8px;

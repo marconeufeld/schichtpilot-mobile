@@ -1,0 +1,14 @@
+SchichtPilot Mobile 1.0 RC – Build 033 Backup-Kompatibilität
+
+Behoben:
+- Safari kann Backups als SchichtPilot_Backup.spb.json speichern.
+- Der Import akzeptiert jetzt .spb, .spb.json und .json.
+- Entscheidend ist weiterhin der Inhalt der Datei, nicht nur die Dateiendung.
+- Der Export verwendet nun application/octet-stream, damit Browser die Endung .spb möglichst beibehalten.
+- Versionsangaben und Cache-Buster auf Build 033 aktualisiert.
+
+Unverändert:
+- Backupformat Version 1
+- Manuelles Backup: SchichtPilot_Backup.spb
+- Sicherheitskopie: SchichtPilot_Backup_vor_Import.spb
+- Detaillierte Validierung und Vorschau aus Build 032

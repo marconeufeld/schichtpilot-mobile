@@ -1,4 +1,4 @@
-const CACHE_NAME = "schichtpilot-mobile-build-032";
+const CACHE_NAME = "schichtpilot-mobile-build-033";
 const APP_SHELL = [
   "./",
   "./index.html",
