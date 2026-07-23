@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 030: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 031: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 030: erwarteter Netto-Auszahlungsbetrag */
+/* Build 031: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 030: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 031: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1929,7 +1929,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 030 – Workflow Edition */
+/* Build 031 – Workflow Edition */
 .secondary-main-button,
 .secondary-save-button {
   border: 1px solid rgba(169, 147, 255, 0.28);
@@ -2034,7 +2034,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 030: kompakte Statusübersicht im Schichtkalender */
+/* Build 031: kompakte Statusübersicht im Schichtkalender */
 .calendar-status-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2113,4 +2113,115 @@ input[type="time"]::-webkit-datetime-edit {
   .calendar-status-summary-item small {
     font-size: 10px;
   }
+}
+
+
+/* Build 031: Datensicherung */
+.backup-page {
+  gap: 16px;
+  padding-bottom: calc(28px + env(safe-area-inset-bottom));
+}
+
+.backup-card,
+.backup-info {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.backup-card h2,
+.backup-info h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.backup-card p,
+.backup-info p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.backup-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  border-radius: 15px;
+  background: rgba(96, 165, 250, 0.12);
+  font-size: 25px;
+}
+
+.backup-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.035);
+}
+
+.backup-stat span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.backup-stat strong {
+  font-size: 14px;
+  text-align: right;
+}
+
+.import-preview {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.import-file-name {
+  overflow-wrap: anywhere;
+  color: var(--text) !important;
+  font-weight: 800;
+}
+
+.backup-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.danger-button {
+  border-color: rgba(248, 113, 113, 0.32);
+  background: rgba(248, 113, 113, 0.11);
+  color: #fecaca;
+}
+
+.backup-message {
+  padding: 14px 16px;
+  border: 1px solid rgba(134, 239, 172, 0.28);
+  border-radius: 15px;
+  background: rgba(134, 239, 172, 0.1);
+  color: #dcfce7;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.backup-message.error {
+  border-color: rgba(248, 113, 113, 0.32);
+  background: rgba(248, 113, 113, 0.1);
+  color: #fee2e2;
+}
+
+.visually-hidden {
+  position: fixed !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
 }

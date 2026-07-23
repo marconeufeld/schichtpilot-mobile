@@ -333,6 +333,42 @@ window.SchichtPilotStorage = (() => {
     return sanitized;
   }
 
+  function replaceAll(shifts) {
+    if (!Array.isArray(shifts)) {
+      throw new Error("Die Sicherungsdatei enthält keine gültige Schichtliste.");
+    }
+
+    return writeAll(shifts);
+  }
+
+  function mergeAll(importedShifts) {
+    if (!Array.isArray(importedShifts)) {
+      throw new Error("Die Sicherungsdatei enthält keine gültige Schichtliste.");
+    }
+
+    const existing = readAll();
+    const imported = sanitizeShiftList(importedShifts).shifts;
+    const mergedById = new Map(existing.map(shift => [shift.id, shift]));
+
+    imported.forEach(importedShift => {
+      const existingShift = mergedById.get(importedShift.id);
+
+      if (!existingShift) {
+        mergedById.set(importedShift.id, importedShift);
+        return;
+      }
+
+      const importedTime = Date.parse(importedShift.updatedAt) || 0;
+      const existingTime = Date.parse(existingShift.updatedAt) || 0;
+
+      if (importedTime >= existingTime) {
+        mergedById.set(importedShift.id, importedShift);
+      }
+    });
+
+    return writeAll(Array.from(mergedById.values()));
+  }
+
   function save(shift) {
     if (!shift || typeof shift !== "object") {
       throw new Error("Der Eintrag enthält keine gültigen Daten.");
@@ -463,6 +499,8 @@ window.SchichtPilotStorage = (() => {
 
   return {
     readAll,
+    replaceAll,
+    mergeAll,
     save,
     getById,
     remove,

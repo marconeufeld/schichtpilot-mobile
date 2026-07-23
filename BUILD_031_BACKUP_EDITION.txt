@@ -1,0 +1,14 @@
+SchichtPilot Mobile 1.0 RC – Build 031 Backup Edition
+
+Neu:
+- Export aller Schichten und Kommentare als SchichtPilot_Backup.spb.
+- Import einer .spb-Sicherung.
+- Wahl zwischen Zusammenführen und vollständigem Ersetzen.
+- Zwei Bestätigungen vor dem vollständigen Ersetzen.
+- Gemeinsames, versioniertes Sicherungsformat für Mobile und Desktop.
+- Kompatibler Import für versionierte Backups sowie einfache Schichtlisten.
+
+Wichtig:
+- Build 031 führt noch keine automatische iCloud-Synchronisierung aus.
+- Die Desktop-App benötigt eine entsprechende Import-/Export-Erweiterung,
+  bevor sie dieses gemeinsame Format direkt verwenden kann.

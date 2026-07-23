@@ -1,4 +1,4 @@
-const CACHE_NAME = "schichtpilot-mobile-build-030";
+const CACHE_NAME = "schichtpilot-mobile-build-031";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -8,6 +8,7 @@ const APP_SHELL = [
   "./beenden.html",
   "./schichtkalender.html",
   "./betriebsstundenliste.html",
+  "./datensicherung.html",
   "./css/main.css",
   "./js/calculation.js",
   "./js/storage.js",
@@ -17,6 +18,7 @@ const APP_SHELL = [
   "./js/hours-list.js",
   "./js/pwa.js",
   "./js/app-exit.js",
+  "./js/backup.js",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",

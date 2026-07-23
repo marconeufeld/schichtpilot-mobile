@@ -1,0 +1,26 @@
+SchichtPilot Backupformat Version 1
+Dateiendung: .spb
+Standarddateiname: SchichtPilot_Backup.spb
+Kodierung: UTF-8
+Inhalt: JSON
+
+Grundstruktur:
+{
+  "format": "SchichtPilot Backup",
+  "formatVersion": 1,
+  "createdAt": "ISO-8601-Zeitstempel",
+  "application": {
+    "name": "SchichtPilot",
+    "platform": "mobile oder desktop",
+    "build": "Buildnummer"
+  },
+  "data": {
+    "shifts": []
+  }
+}
+
+Jeder Schichteintrag kann enthalten:
+id, date, start, end, pauseStart, pauseEnd, status, comment, createdAt, updatedAt
+
+Gültige Statuswerte:
+Arbeit, Urlaub, Krank, Feiertag
