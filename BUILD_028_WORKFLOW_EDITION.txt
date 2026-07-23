@@ -1,0 +1,16 @@
+SchichtPilot Mobile 1.0 RC – Build 028 Workflow Edition
+
+Änderungen:
+- Startseite: neuer Button „Programm beenden“.
+- Gespeichert-Seite: zusätzlicher Button „Programm beenden“.
+- Schicht erfassen und bearbeiten: optionales Kommentarfeld.
+- Kommentare werden lokal, rückwärtskompatibel und auf 1000 Zeichen begrenzt gespeichert.
+- Kommentare erscheinen in Vorschau und Betriebsstundenliste.
+- Kalender: Ein Klick auf eine Schicht öffnet jetzt die zugehörige Detailkarte
+  in der Betriebsstundenliste; Bearbeiten und Löschen erfolgen von dort.
+- Service-Worker-Cache auf Build 028 aktualisiert.
+
+Hinweis zu iOS:
+Eine installierte Web-App darf sich aus Sicherheitsgründen nicht zuverlässig selbst
+schließen. Der Button versucht das Schließen und zeigt andernfalls einen eindeutigen
+Abschlussbildschirm. Danach kann die App über den iPhone-App-Umschalter geschlossen werden.

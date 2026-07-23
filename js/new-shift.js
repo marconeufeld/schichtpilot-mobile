@@ -4,6 +4,7 @@ const endTime = document.getElementById("endTime");
 const pauseStart = document.getElementById("pauseStart");
 const pauseEnd = document.getElementById("pauseEnd");
 const formMessage = document.getElementById("formMessage");
+const shiftComment = document.getElementById("shiftComment");
 const statusInputs = [...document.querySelectorAll('input[name="shiftStatus"]')];
 const workTimeFields = document.getElementById("workTimeFields");
 const absenceNote = document.getElementById("absenceNote");
@@ -92,6 +93,7 @@ function fillForm(data) {
   pauseStart.value = data.pauseStart || "00:30";
   pauseEnd.value = data.pauseEnd || "01:00";
   setSelectedStatus(data.status || "Arbeit");
+  shiftComment.value = data.comment || "";
   syncDisplays();
 }
 
@@ -170,10 +172,11 @@ document.getElementById("shiftForm").addEventListener("submit", event => {
       end: isWork ? endTime.value : "00:00",
       pauseStart: isWork ? pauseStart.value : "00:00",
       pauseEnd: isWork ? pauseEnd.value : "00:00",
-      status
+      status,
+      comment: shiftComment.value.trim()
     });
 
-    window.location.href = "vorschau.html?v=027";
+    window.location.href = "vorschau.html?v=028";
   } catch {
     formMessage.textContent = "Die Eingaben konnten nicht für die Vorschau gespeichert werden.";
   }

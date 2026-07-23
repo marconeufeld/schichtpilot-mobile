@@ -10,6 +10,8 @@ const preview0004 = document.getElementById("preview0004");
 const preview0406 = document.getElementById("preview0406");
 const previewMessage = document.getElementById("previewMessage");
 const saveButton = document.getElementById("saveShiftButton");
+const previewCommentBlock = document.getElementById("previewCommentBlock");
+const previewComment = document.getElementById("previewComment");
 
 let draft = null;
 const editingExisting = Boolean(SchichtPilotStorage.getEditId());
@@ -36,6 +38,10 @@ function loadPreview() {
     previewStatus.textContent = status;
     previewStatus.classList.remove("hidden");
     previewStatus.dataset.status = status.toLowerCase();
+
+    const comment = String(draft.comment || "").trim();
+    previewCommentBlock.classList.toggle("hidden", !comment);
+    previewComment.textContent = comment;
 
     previewWorkDetails.classList.toggle("hidden", !isWork);
     previewAbsenceDetails.classList.toggle("hidden", isWork);
@@ -77,8 +83,8 @@ saveButton.addEventListener("click", () => {
     SchichtPilotStorage.clearDraft();
     SchichtPilotStorage.setEditId(null);
     window.location.href = editingExisting
-      ? "gespeichert.html?v=027&updated=1"
-      : "gespeichert.html?v=027";
+      ? "gespeichert.html?v=028&updated=1"
+      : "gespeichert.html?v=028";
   } catch (error) {
     previewMessage.textContent =
       error instanceof Error

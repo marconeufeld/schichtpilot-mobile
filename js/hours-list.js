@@ -11,6 +11,7 @@ const cancelDeleteButton = document.getElementById("cancelDeleteButton");
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 
 let pendingDeleteId = null;
+const requestedShiftId = new URLSearchParams(window.location.search).get("shift");
 
 function normalizeStatus(status) {
   const value = String(status || "Arbeit").trim().toLowerCase();
@@ -18,6 +19,15 @@ function normalizeStatus(status) {
   if (value === "krank" || value === "krankheit") return "Krank";
   if (value === "feiertag") return "Feiertag";
   return "Arbeit";
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 function formatDate(dateValue) {
@@ -37,7 +47,7 @@ function currentMonthKey() {
 function editShift(id) {
   SchichtPilotStorage.setEditId(id);
   SchichtPilotStorage.clearDraft();
-  window.location.href = "neue-schicht.html?v=027&mode=edit";
+  window.location.href = "neue-schicht.html?v=028&mode=edit";
 }
 
 function openDeleteDialog(id) {
@@ -165,6 +175,7 @@ function render() {
 
     const card = document.createElement("article");
     card.className = "shift-card";
+    card.dataset.shiftId = shift.id;
 
     card.classList.add(`status-${status.toLowerCase()}`);
 
@@ -195,6 +206,13 @@ function render() {
               `
           }
 
+
+          ${
+            shift.comment
+              ? `<div class="shift-comment"><span>Kommentar</span><p>${escapeHtml(shift.comment)}</p></div>`
+              : ""
+          }
+
           <button class="edit-button" type="button">✏️ Eintrag bearbeiten</button>
           <button class="delete-button" type="button">Eintrag löschen</button>
         </div>
@@ -209,7 +227,15 @@ function render() {
     shiftList.appendChild(card);
 
     requestAnimationFrame(() => {
-      setCardOpen(card, index === 0);
+      const shouldFocus = requestedShiftId === shift.id;
+      setCardOpen(card, shouldFocus || (!requestedShiftId && index === 0));
+
+      if (shouldFocus) {
+        card.classList.add("is-focused");
+        window.setTimeout(() => {
+          card.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 120);
+      }
     });
   });
 }

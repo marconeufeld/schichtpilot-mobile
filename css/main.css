@@ -1773,7 +1773,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 027: echte Brutto-Anzeige und geschützte Netto-Schätzung */
+/* Build 028: echte Brutto-Anzeige und geschützte Netto-Schätzung */
 .earnings-breakdown {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1819,7 +1819,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 027: erwarteter Netto-Auszahlungsbetrag */
+/* Build 028: erwarteter Netto-Auszahlungsbetrag */
 .earnings-payout-row {
   margin-top: 2px;
   border-color: rgba(169, 147, 255, 0.24);
@@ -1831,7 +1831,7 @@ input[type="time"]::-webkit-datetime-edit {
 }
 
 
-/* Build 027: kompakte Erfassung bezahlter Abwesenheiten */
+/* Build 028: kompakte Erfassung bezahlter Abwesenheiten */
 .status-selector {
   margin: 0 0 18px;
   padding: 0;
@@ -1926,4 +1926,109 @@ input[type="time"]::-webkit-datetime-edit {
   .status-options {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+
+/* Build 028 – Workflow Edition */
+.secondary-main-button,
+.secondary-save-button {
+  border: 1px solid rgba(169, 147, 255, 0.28);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: none;
+}
+
+.secondary-main-button {
+  min-height: 64px;
+  color: rgba(230, 236, 247, 0.88);
+  font-size: clamp(19px, 4.8vw, 23px);
+}
+
+.secondary-save-button {
+  margin-top: 14px;
+  color: rgba(230, 236, 247, 0.9);
+  font-size: 20px;
+}
+
+.secondary-main-button:active,
+.secondary-save-button:active {
+  background: rgba(169, 147, 255, 0.12);
+}
+
+.comment-field {
+  margin-top: 4px;
+}
+
+.comment-field small {
+  color: rgba(170, 180, 196, 0.62);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.comment-field textarea {
+  width: 100%;
+  min-height: 112px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--panel-soft);
+  color: white;
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 17px;
+  line-height: 1.45;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.comment-field textarea:focus {
+  border-color: rgba(169, 147, 255, 0.56);
+  box-shadow: 0 0 0 2px rgba(169, 147, 255, 0.09);
+}
+
+.comment-field textarea::placeholder {
+  color: rgba(156, 168, 187, 0.55);
+}
+
+.preview-comment,
+.shift-comment {
+  margin: 13px 0;
+  padding: 12px 13px;
+  border: 1px solid rgba(169, 147, 255, 0.13);
+  border-radius: 12px;
+  background: rgba(169, 147, 255, 0.05);
+}
+
+.preview-comment span,
+.shift-comment span {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(190, 201, 221, 0.66);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.preview-comment p,
+.shift-comment p {
+  margin: 0;
+  color: rgba(245, 247, 252, 0.92);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.shift-card.is-focused {
+  border-color: rgba(96, 165, 250, 0.62);
+  box-shadow:
+    0 0 0 2px rgba(96, 165, 250, 0.12),
+    0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.exit-page .saved-card {
+  text-align: center;
+}
+
+.exit-icon {
+  background: rgba(134, 239, 172, 0.12);
 }

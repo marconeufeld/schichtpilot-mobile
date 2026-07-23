@@ -242,10 +242,9 @@ function monthTransition(direction) {
   }, 260);
 }
 
-function selectShiftForEditing(id) {
-  SchichtPilotStorage.setEditId(id);
-  SchichtPilotStorage.clearDraft();
-  window.location.href = "neue-schicht.html?v=027&mode=edit";
+function openShiftDetails(id) {
+  window.location.href =
+    `betriebsstundenliste.html?v=028&shift=${encodeURIComponent(id)}`;
 }
 
 function renderSelectedDay(shiftsByDate) {
@@ -263,7 +262,7 @@ function renderSelectedDay(shiftsByDate) {
   selectedShiftList.innerHTML = "";
 
   newShiftForDayButton.href =
-    `neue-schicht.html?v=027&mode=new&date=${encodeURIComponent(selectedDateKey)}`;
+    `neue-schicht.html?v=028&mode=new&date=${encodeURIComponent(selectedDateKey)}`;
 
   if (!shifts.length) {
     const empty = document.createElement("div");
@@ -289,7 +288,7 @@ function renderSelectedDay(shiftsByDate) {
     const item = document.createElement("button");
     item.className = "calendar-shift-item";
     item.type = "button";
-    item.setAttribute("aria-label", `Schicht ${shift.start} bis ${shift.end} bearbeiten`);
+    item.setAttribute("aria-label", `Details zur Schicht ${shift.start} bis ${shift.end} öffnen`);
 
     const normalizedStatus = normalizeStatus(shift.status);
 
@@ -312,7 +311,7 @@ function renderSelectedDay(shiftsByDate) {
       <span class="calendar-shift-arrow">›</span>
     `;
 
-    item.addEventListener("click", () => selectShiftForEditing(shift.id));
+    item.addEventListener("click", () => openShiftDetails(shift.id));
     selectedShiftList.appendChild(item);
   });
 

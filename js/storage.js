@@ -154,6 +154,10 @@ window.SchichtPilotStorage = (() => {
     if (usedIds.has(id)) id = makeId();
     usedIds.add(id);
 
+    const comment = typeof raw.comment === "string"
+      ? raw.comment.trim().slice(0, 1000)
+      : "";
+
     const now = new Date().toISOString();
     const createdAt = validIsoTimestamp(raw.createdAt) ? raw.createdAt : now;
     const updatedAt = validIsoTimestamp(raw.updatedAt) ? raw.updatedAt : createdAt;
@@ -167,6 +171,7 @@ window.SchichtPilotStorage = (() => {
         pauseStart: "00:00",
         pauseEnd: "00:00",
         status,
+        comment,
         createdAt,
         updatedAt
       };
@@ -187,6 +192,7 @@ window.SchichtPilotStorage = (() => {
       pauseStart,
       pauseEnd,
       status: "Arbeit",
+      comment,
       createdAt,
       updatedAt
     };
@@ -333,6 +339,10 @@ window.SchichtPilotStorage = (() => {
     }
 
     const shifts = readAll();
+    const comment = typeof raw.comment === "string"
+      ? raw.comment.trim().slice(0, 1000)
+      : "";
+
     const now = new Date().toISOString();
     const requestedId =
       typeof shift.id === "string" && shift.id.trim() ? shift.id.trim() : null;

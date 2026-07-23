@@ -1,4 +1,4 @@
-SchichtPilot Mobile – Build 027
+SchichtPilot Mobile – Build 028
 Datensicherheit und Kompatibilität
 
 Umgesetzt:

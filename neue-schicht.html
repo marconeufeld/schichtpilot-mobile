@@ -14,12 +14,12 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" href="icons/favicon-64.png" type="image/png">
   <title>Neue Schicht · SchichtPilot Mobile</title>
-  <link rel="stylesheet" href="css/main.css?v=027">
+  <link rel="stylesheet" href="css/main.css?v=028">
 </head>
 <body>
   <main class="app">
     <header class="page-header compact-header">
-      <a class="back-button" href="index.html?v=027" aria-label="Zurück zur Startseite">‹</a>
+      <a class="back-button" href="index.html?v=028" aria-label="Zurück zur Startseite">‹</a>
       <div>
         <h2 id="pageTitle">Neue Schicht</h2>
         <p id="pageSubtitle">Zeiten eingeben</p>
@@ -92,13 +92,20 @@
         <span>7,5 Stunden · kein Nachtzuschlag · kein Fahrgeld</span>
       </div>
 
+
+      <label class="field comment-field">
+        <span>Kommentar <small>(optional)</small></span>
+        <textarea id="shiftComment" maxlength="1000" rows="4"
+          placeholder="Zum Beispiel: Urlaubsvertretung, Störung oder Besonderheit"></textarea>
+      </label>
+
       <p id="formMessage" class="form-message" role="alert"></p>
       <button class="save-button" type="submit">Weiter</button>
     </form>
   </main>
 
-  <script src="js/storage.js?v=027"></script>
-  <script src="js/new-shift.js?v=027"></script>
-  <script src="js/pwa.js?v=027"></script>
+  <script src="js/storage.js?v=028"></script>
+  <script src="js/new-shift.js?v=028"></script>
+  <script src="js/pwa.js?v=028"></script>
 </body>
 </html>

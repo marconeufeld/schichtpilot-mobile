@@ -2,7 +2,7 @@
   "id": "./",
   "name": "SchichtPilot Mobile",
   "short_name": "SchichtPilot",
-  "description": "Schichten, Arbeitszeiten und Lohnprognosen lokal auf dem iPhone erfassen.",
+  "description": "Schichten, Kommentare, Arbeitszeiten und Lohnprognosen lokal auf dem iPhone erfassen.",
   "lang": "de-DE",
   "dir": "ltr",
   "start_url": "./index.html",
