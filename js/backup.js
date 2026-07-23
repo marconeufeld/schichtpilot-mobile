@@ -3,7 +3,7 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const CURRENT_BUILD = 35;
+  const CURRENT_BUILD = 35.1;
   const FILE_NAME = "SchichtPilot_Backup.spb";
   const SAFETY_FILE_NAME = "SchichtPilot_Backup_vor_Import.spb";
   const MAX_FILE_SIZE = 10 * 1024 * 1024;

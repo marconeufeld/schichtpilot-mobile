@@ -346,7 +346,7 @@ window.SchichtPilotStorage = (() => {
   }
 
   function shiftMergeKey(shift) {
-    const status = ALLOWED_STATUSES.has(shift.status) ? shift.status : "Arbeit";
+    const status = VALID_STATUSES.has(shift.status) ? shift.status : "Arbeit";
     if (status !== "Arbeit") {
       return [shift.date, status].join("|");
     }
@@ -588,6 +588,7 @@ window.SchichtPilotStorage = (() => {
   return {
     readAll,
     replaceAll,
+    analyzeMerge,
     mergeAll,
     save,
     getById,

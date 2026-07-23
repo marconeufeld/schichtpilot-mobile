@@ -1,0 +1,18 @@
+SchichtPilot Mobile – Build 035.1
+
+Behobene Fehler:
+1. analyzeMerge() war zwar in storage.js vorhanden, aber nicht über
+   window.SchichtPilotStorage veröffentlicht.
+2. Die Merge-Funktion verwendete den nicht vorhandenen Namen
+   ALLOWED_STATUSES statt VALID_STATUSES.
+
+Folge in Build 035:
+- „SchichtPilotStorage.analyzeMerge is not a function“
+- Nach dem ersten Fix wäre zusätzlich ein Fehler durch ALLOWED_STATUSES möglich gewesen.
+
+Build 035.1:
+- veröffentlicht analyzeMerge korrekt,
+- verwendet VALID_STATUSES,
+- liefert storage.js und backup.js konsistent aus,
+- verwendet einen neuen Service-Worker-Cache,
+- behält den Dublettenschutz und die Importvorschau bei.

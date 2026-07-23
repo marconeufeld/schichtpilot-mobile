@@ -1,0 +1,24 @@
+SchichtPilot Mobile Build 035.1 – Prüfbericht
+
+JavaScript-Syntaxprüfung:
+- alle JavaScript-Dateien bestanden
+
+Storage-API:
+- analyzeMerge öffentlich verfügbar: ja
+- gültige Statuskonstante verwendet: VALID_STATUSES
+
+Praxisnaher Merge-Test:
+- Mobile vorher: 30 Schichten
+- Desktop-Backup: 90 Schichten
+- bereits vorhanden: 30
+- neu: 60
+- abweichend: 0
+- erwarteter Endbestand: 90
+- tatsächlicher Endbestand nach mergeAll: 90
+
+Ladereihenfolge:
+- storage.js vor backup.js: bestanden
+
+PWA:
+- Cache: schichtpilot-mobile-build-035-1
+- Buildkennung: 035.1
