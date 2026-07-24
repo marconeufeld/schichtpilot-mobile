@@ -1,0 +1,13 @@
+SchichtPilot Mobile Build 037 – Prüfbericht
+
+JavaScript-Syntax:
+- alle Dateien bestanden
+
+Navigationstest:
+- ausgewählte importierte ID als Zahl erkannt: ja
+- übergebener Tag: 2026-06-30
+- geöffneter Monat: 06.2026
+- erwartetes Ergebnis: Juni 2026 und ausgewählte Schicht geöffnet
+
+Service Worker:
+- neuer Cache: schichtpilot-mobile-build-037

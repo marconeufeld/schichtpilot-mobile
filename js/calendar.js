@@ -260,9 +260,14 @@ function monthTransition(direction) {
   }, 260);
 }
 
-function openShiftDetails(id) {
-  window.location.href =
-    `betriebsstundenliste.html?v=035&shift=${encodeURIComponent(id)}`;
+function openShiftDetails(id, dateKey) {
+  const params = new URLSearchParams({
+    v: "037",
+    shift: String(id),
+    date: String(dateKey || "")
+  });
+
+  window.location.href = `betriebsstundenliste.html?${params.toString()}`;
 }
 
 function renderSelectedDay(shiftsByDate) {
@@ -329,7 +334,7 @@ function renderSelectedDay(shiftsByDate) {
       <span class="calendar-shift-arrow">›</span>
     `;
 
-    item.addEventListener("click", () => openShiftDetails(shift.id));
+    item.addEventListener("click", () => openShiftDetails(shift.id, selectedDateKey));
     selectedShiftList.appendChild(item);
   });
 

@@ -1,0 +1,19 @@
+SchichtPilot Mobile – Build 037
+
+Behoben:
+- Beim Öffnen einer Schicht aus einem früheren Monat wurde in der
+  Betriebsstundenliste fälschlich der aktuelle Monat angezeigt.
+- Der ausgewählte Kalendertag wird jetzt als Datum an die
+  Betriebsstundenliste übergeben.
+- Die Betriebsstundenliste bestimmt den Monat zuerst aus der ausgewählten
+  Schicht, ersatzweise aus dem übergebenen Datum.
+- Schicht-IDs werden robust als Text verglichen, sodass auch importierte
+  numerische Desktop-IDs korrekt erkannt werden.
+- Die ausgewählte Schicht wird automatisch geöffnet und fokussiert.
+
+Unverändert:
+- Backup und Import
+- Dublettenschutz
+- Berechnungen
+- Schichterfassung
+- vorhandenes Design

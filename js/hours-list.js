@@ -11,7 +11,9 @@ const cancelDeleteButton = document.getElementById("cancelDeleteButton");
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 
 let pendingDeleteId = null;
-const requestedShiftId = new URLSearchParams(window.location.search).get("shift");
+const requestParams = new URLSearchParams(window.location.search);
+const requestedShiftId = requestParams.get("shift");
+const requestedDate = requestParams.get("date");
 
 function normalizeStatus(status) {
   const value = String(status || "Arbeit").trim().toLowerCase();
@@ -47,7 +49,7 @@ function currentMonthKey() {
 function editShift(id) {
   SchichtPilotStorage.setEditId(id);
   SchichtPilotStorage.clearDraft();
-  window.location.href = "neue-schicht.html?v=035&mode=edit";
+  window.location.href = "neue-schicht.html?v=037&mode=edit";
 }
 
 function openDeleteDialog(id) {
@@ -114,11 +116,25 @@ function getVisibleMonthData() {
       return bKey.localeCompare(aKey);
     });
 
-  const monthKey = currentMonthKey();
-  let shifts = allShifts.filter(shift => shift.date.startsWith(monthKey));
-  let displayDate = new Date();
+  const requestedShift = requestedShiftId
+    ? allShifts.find(shift => String(shift.id) === String(requestedShiftId))
+    : null;
 
-  if (!shifts.length && allShifts.length) {
+  let requestedMonthKey = null;
+
+  if (requestedShift && /^\d{4}-\d{2}-\d{2}$/.test(requestedShift.date)) {
+    requestedMonthKey = requestedShift.date.slice(0, 7);
+  } else if (requestedDate && /^\d{4}-\d{2}-\d{2}$/.test(requestedDate)) {
+    requestedMonthKey = requestedDate.slice(0, 7);
+  }
+
+  const monthKey = requestedMonthKey || currentMonthKey();
+  let shifts = allShifts.filter(shift => shift.date.startsWith(monthKey));
+  let displayDate = requestedMonthKey
+    ? new Date(`${requestedMonthKey}-01T12:00:00`)
+    : new Date();
+
+  if (!shifts.length && allShifts.length && !requestedMonthKey) {
     const newest = allShifts[0];
     const fallbackMonth = newest.date.slice(0, 7);
     shifts = allShifts.filter(shift => shift.date.startsWith(fallbackMonth));
@@ -227,7 +243,9 @@ function render() {
     shiftList.appendChild(card);
 
     requestAnimationFrame(() => {
-      const shouldFocus = requestedShiftId === shift.id;
+      const shouldFocus =
+        requestedShiftId !== null &&
+        String(requestedShiftId) === String(shift.id);
       setCardOpen(card, shouldFocus || (!requestedShiftId && index === 0));
 
       if (shouldFocus) {
