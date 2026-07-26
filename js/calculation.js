@@ -22,10 +22,7 @@ window.SchichtPilotCalc = (() => {
   }
 
   function normalizeEnd(start, end) {
-    // Eine Endzeit bis einschließlich Startzeit gehört zur nächsten Kalendertag-Hälfte.
-    // Beispiel: 21:00 → 06:00 = 21:00 → 30:00 = 9 Stunden.
-    if (end <= start) return end + 24 * 60;
-    return end;
+    return end <= start ? end + 1440 : end;
   }
 
   function normalizePoint(point, shiftStart) {
@@ -53,19 +50,32 @@ window.SchichtPilotCalc = (() => {
     }
 
     end = normalizeEnd(start, end);
-    pauseStart = normalizePoint(pauseStart, start);
-    pauseEnd = normalizePoint(pauseEnd, start);
-    if (pauseEnd <= pauseStart) pauseEnd += 1440;
+
+    // Gleiche Pausenzeiten bedeuten „keine Pause“.
+    // Besonders importierte Schichten enthalten häufig 00:00–00:00.
+    // Diese Angabe darf nicht als Pause von Mitternacht bis zum Schichtende
+    // interpretiert werden.
+    const hasPause = pauseStart !== pauseEnd;
+
+    if (hasPause) {
+      pauseStart = normalizePoint(pauseStart, start);
+      pauseEnd = normalizePoint(pauseEnd, start);
+      if (pauseEnd <= pauseStart) pauseEnd += 1440;
+    }
 
     const gross = end - start;
     if (gross <= 0 || gross > 18 * 60) throw new Error("Die Schichtdauer ist unplausibel.");
 
-    const pauseMinutes = overlap(start, end, pauseStart, pauseEnd);
+    const pauseMinutes = hasPause
+      ? overlap(start, end, pauseStart, pauseEnd)
+      : 0;
     const paid = gross - pauseMinutes;
 
     const netBlock = (blockStart, blockEnd) => {
       const worked = overlap(start, end, blockStart, blockEnd);
-      const pauseInBlock = overlap(pauseStart, pauseEnd, blockStart, blockEnd);
+      const pauseInBlock = hasPause
+        ? overlap(pauseStart, pauseEnd, blockStart, blockEnd)
+        : 0;
       return Math.max(0, worked - pauseInBlock);
     };
 

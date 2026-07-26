@@ -1,0 +1,14 @@
+SchichtPilot Mobile – Build 039
+
+Fehlerbehebung:
+- Importierte Schichten mit Pause 00:00–00:00 werden jetzt korrekt als „keine Pause“ behandelt.
+- Eine Nachtschicht 21:00–06:00 ergibt dadurch wieder 9 Stunden vor einem echten Pausenabzug.
+- Die Zeitblöcke 21–24, 00–04 und 04–06 werden vollständig berücksichtigt.
+- Monatsstunden und Lohnprognose verwenden automatisch die korrigierte Berechnung.
+- PWA-/Service-Worker-Version wurde auf Build 039 angehoben.
+
+Ursache:
+Bei identischen Pausenzeiten wurde bisher durch die Folgetagsnormalisierung versehentlich
+eine sehr lange Pause erzeugt. Bei 00:00–00:00 wurde dadurch der komplette Zeitraum nach
+Mitternacht abgezogen. Neue Schichten konnten korrekt aussehen, während importierte
+Schichten mit diesem Pausenformat falsch summiert wurden.

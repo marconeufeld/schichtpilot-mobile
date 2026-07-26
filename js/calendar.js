@@ -262,7 +262,7 @@ function monthTransition(direction) {
 
 function openShiftDetails(id, dateKey) {
   const params = new URLSearchParams({
-    v: "038",
+    v: "037",
     shift: String(id),
     date: String(dateKey || "")
   });

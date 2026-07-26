@@ -1,4 +1,4 @@
-SchichtPilot Mobile Build 038 – Prüfbericht
+SchichtPilot Mobile Build 037 – Prüfbericht
 
 JavaScript-Syntax:
 - alle Dateien bestanden
@@ -10,4 +10,4 @@ Navigationstest:
 - erwartetes Ergebnis: Juni 2026 und ausgewählte Schicht geöffnet
 
 Service Worker:
-- neuer Cache: schichtpilot-mobile-build-038
+- neuer Cache: schichtpilot-mobile-build-037
