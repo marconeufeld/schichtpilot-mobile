@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const PWA_BUILD = "037";
+  const PWA_BUILD = "038";
   const RELOAD_KEY = `schichtPilot.pwaReloaded.${PWA_BUILD}`;
   let refreshing = false;
   let updateRegistration = null;

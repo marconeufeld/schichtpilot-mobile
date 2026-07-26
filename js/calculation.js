@@ -22,7 +22,10 @@ window.SchichtPilotCalc = (() => {
   }
 
   function normalizeEnd(start, end) {
-    return end <= start ? end + 1440 : end;
+    // Eine Endzeit bis einschließlich Startzeit gehört zur nächsten Kalendertag-Hälfte.
+    // Beispiel: 21:00 → 06:00 = 21:00 → 30:00 = 9 Stunden.
+    if (end <= start) return end + 24 * 60;
+    return end;
   }
 
   function normalizePoint(point, shiftStart) {

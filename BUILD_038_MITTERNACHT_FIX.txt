@@ -1,0 +1,12 @@
+SchichtPilot Mobile – Build 038
+
+Fix:
+- PWA-Cache auf Build 038 angehoben.
+- calculation.js, calendar.js, hours-list.js und storage.js werden updatekritisch behandelt.
+- Neuer Service Worker übernimmt sofort die Kontrolle.
+- Schichten über Mitternacht werden ausdrücklich als Folgetag behandelt.
+  Beispiel: 21:00 bis 06:00 = 9 Stunden vor Pausenabzug.
+
+Ursache im geprüften Projekt:
+Die aktuelle calculation.js enthielt bereits die korrekte Folgetag-Logik. Das beobachtete
+Verhalten passt daher zu einer weiterhin aktiven, älteren Cache-Version der PWA.

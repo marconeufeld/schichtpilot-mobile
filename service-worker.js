@@ -1,4 +1,4 @@
-const CACHE_NAME = "schichtpilot-mobile-build-037";
+const CACHE_NAME = "schichtpilot-mobile-build-038";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -33,6 +33,7 @@ self.addEventListener("install", event => {
     caches
       .open(CACHE_NAME)
       .then(cache => cache.addAll(APP_SHELL))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -103,6 +104,10 @@ async function handleAsset(request) {
   const url = new URL(request.url);
   const updateCritical =
     url.pathname.endsWith("/js/pwa.js") ||
+    url.pathname.endsWith("/js/calculation.js") ||
+    url.pathname.endsWith("/js/calendar.js") ||
+    url.pathname.endsWith("/js/hours-list.js") ||
+    url.pathname.endsWith("/js/storage.js") ||
     url.pathname.endsWith("/manifest.webmanifest");
 
   if (!updateCritical) {
@@ -147,7 +152,7 @@ self.addEventListener("message", event => {
   if (message.type === "GET_BUILD" && event.source) {
     event.source.postMessage({
       type: "SCHICHTPILOT_BUILD",
-      build: "037"
+      build: "038"
     });
   }
 });
