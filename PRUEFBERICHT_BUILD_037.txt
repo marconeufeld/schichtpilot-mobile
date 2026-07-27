@@ -1,4 +1,4 @@
-SchichtPilot Mobile Build 040 – Prüfbericht
+SchichtPilot Mobile Build 041 – Prüfbericht
 
 JavaScript-Syntax:
 - alle Dateien bestanden

@@ -3,9 +3,24 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const CURRENT_BUILD = 37;
-  const FILE_NAME = "SchichtPilot_Mobile_${date}_${time}.spb";
-  const SAFETY_FILE_NAME = "SchichtPilot_Backup_vor_Import.spb";
+  const CURRENT_BUILD = 41;
+  function createBackupFileName(prefix = "SchichtPilot_Mobile") {
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat("de-DE", {
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    }).formatToParts(now);
+
+    const value = type =>
+      parts.find(part => part.type === type)?.value ?? "00";
+
+    return `${prefix}_${value("year")}-${value("month")}-${value("day")}_${value("hour")}-${value("minute")}.spb`;
+  }
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
   const ALLOWED_STATUSES = new Set(["Arbeit", "Urlaub", "Krank", "Feiertag"]);
 
@@ -54,7 +69,7 @@
       application: {
         name: "SchichtPilot",
         platform: "mobile",
-        build: "033"
+        build: "041"
       },
       purpose: filePurpose,
       data: {
@@ -86,8 +101,9 @@
 
     try {
       const shifts = window.SchichtPilotStorage.readAll();
-      triggerDownload(buildBackup(shifts), FILE_NAME);
-      showMessage(`${shifts.length} Einträge wurden als ${FILE_NAME} bereitgestellt.`);
+      const fileName = createBackupFileName();
+      triggerDownload(buildBackup(shifts), fileName);
+      showMessage(`${shifts.length} Einträge wurden als ${fileName} bereitgestellt.`);
     } catch (error) {
       showMessage(
         error instanceof Error ? error.message : "Die Sicherung konnte nicht erstellt werden.",
@@ -98,7 +114,7 @@
 
   function downloadCurrentDataAsSafetyCopy() {
     const currentShifts = window.SchichtPilotStorage.readAll();
-    triggerDownload(buildBackup(currentShifts, "before-import"), SAFETY_FILE_NAME);
+    triggerDownload(buildBackup(currentShifts, "before-import"), createBackupFileName("SchichtPilot_Mobile_vor_Import"));
     return currentShifts.length;
   }
 
@@ -347,7 +363,7 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 035. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 041. Trotzdem fortfahren?`
     );
   }
 

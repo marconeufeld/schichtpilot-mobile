@@ -182,7 +182,7 @@ window.SchichtPilotStorage = (() => {
 
     if (!start || !end) return null;
 
-    // Build 040: automatische Reparatur älterer/importierter Arbeitsschichten.
+    // Build 041: automatische Reparatur älterer/importierter Arbeitsschichten.
     // Fehlende oder identische Pausenzeiten (häufig 00:00–00:00) erhalten
     // wieder die SchichtPilot-Standardpause 00:30–01:00.
     // Abweichende, bewusst eingetragene Pausen bleiben unverändert.

@@ -1,4 +1,4 @@
-SchichtPilot Mobile – Build 040
+SchichtPilot Mobile – Build 041
 
 Automatische Pausenreparatur:
 - Arbeitsschichten mit fehlender Pause oder identischen Pausenzeiten
@@ -11,5 +11,5 @@ Automatische Pausenreparatur:
 - Beispiel: 21:00–06:00 = 9,0 h brutto, minus 0,5 h Pause = 8,5 h bezahlt.
 
 Hinweis:
-Die bestehende Import-/Dateinamenslogik wurde nicht umgebaut. Build 040 ergänzt
+Die bestehende Import-/Dateinamenslogik wurde nicht umgebaut. Build 041 ergänzt
 ausschließlich die automatische Datenreparatur und hebt den PWA-Cache an.

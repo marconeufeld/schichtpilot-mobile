@@ -1,0 +1,13 @@
+SchichtPilot Mobile – Build 041
+
+Änderungen:
+- Manuelle Backups heißen jetzt:
+  SchichtPilot_Mobile_YYYY-MM-DD_HH-MM.spb
+- Sicherheitskopien vor einem Import heißen:
+  SchichtPilot_Mobile_vor_Import_YYYY-MM-DD_HH-MM.spb
+- Backup-Metadaten melden Build 041.
+- Sichtbare Versionsanzeige wurde auf Build 041 gesetzt.
+- PWA-Updatekennung wurde auf 041 gesetzt.
+- Service-Worker-Cache wurde auf schichtpilot-mobile-build-041 angehoben.
+
+Die Stunden- und Pausenlogik aus Build 040 bleibt unverändert.
