@@ -179,10 +179,22 @@ window.SchichtPilotStorage = (() => {
 
     const start = validTime(raw.start) ? raw.start : null;
     const end = validTime(raw.end) ? raw.end : null;
-    const pauseStart = validTime(raw.pauseStart) ? raw.pauseStart : "00:00";
-    const pauseEnd = validTime(raw.pauseEnd) ? raw.pauseEnd : "00:00";
 
     if (!start || !end) return null;
+
+    // Build 040: automatische Reparatur älterer/importierter Arbeitsschichten.
+    // Fehlende oder identische Pausenzeiten (häufig 00:00–00:00) erhalten
+    // wieder die SchichtPilot-Standardpause 00:30–01:00.
+    // Abweichende, bewusst eingetragene Pausen bleiben unverändert.
+    const rawPauseStart = validTime(raw.pauseStart) ? raw.pauseStart : null;
+    const rawPauseEnd = validTime(raw.pauseEnd) ? raw.pauseEnd : null;
+    const needsDefaultPause =
+      !rawPauseStart ||
+      !rawPauseEnd ||
+      rawPauseStart === rawPauseEnd;
+
+    const pauseStart = needsDefaultPause ? "00:30" : rawPauseStart;
+    const pauseEnd = needsDefaultPause ? "01:00" : rawPauseEnd;
 
     return {
       id,

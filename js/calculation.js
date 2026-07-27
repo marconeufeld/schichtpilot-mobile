@@ -50,32 +50,19 @@ window.SchichtPilotCalc = (() => {
     }
 
     end = normalizeEnd(start, end);
-
-    // Gleiche Pausenzeiten bedeuten „keine Pause“.
-    // Besonders importierte Schichten enthalten häufig 00:00–00:00.
-    // Diese Angabe darf nicht als Pause von Mitternacht bis zum Schichtende
-    // interpretiert werden.
-    const hasPause = pauseStart !== pauseEnd;
-
-    if (hasPause) {
-      pauseStart = normalizePoint(pauseStart, start);
-      pauseEnd = normalizePoint(pauseEnd, start);
-      if (pauseEnd <= pauseStart) pauseEnd += 1440;
-    }
+    pauseStart = normalizePoint(pauseStart, start);
+    pauseEnd = normalizePoint(pauseEnd, start);
+    if (pauseEnd <= pauseStart) pauseEnd += 1440;
 
     const gross = end - start;
     if (gross <= 0 || gross > 18 * 60) throw new Error("Die Schichtdauer ist unplausibel.");
 
-    const pauseMinutes = hasPause
-      ? overlap(start, end, pauseStart, pauseEnd)
-      : 0;
+    const pauseMinutes = overlap(start, end, pauseStart, pauseEnd);
     const paid = gross - pauseMinutes;
 
     const netBlock = (blockStart, blockEnd) => {
       const worked = overlap(start, end, blockStart, blockEnd);
-      const pauseInBlock = hasPause
-        ? overlap(pauseStart, pauseEnd, blockStart, blockEnd)
-        : 0;
+      const pauseInBlock = overlap(pauseStart, pauseEnd, blockStart, blockEnd);
       return Math.max(0, worked - pauseInBlock);
     };
 

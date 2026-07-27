@@ -1,0 +1,15 @@
+SchichtPilot Mobile – Build 040
+
+Automatische Pausenreparatur:
+- Arbeitsschichten mit fehlender Pause oder identischen Pausenzeiten
+  (z. B. 00:00–00:00) werden beim nächsten Laden automatisch auf
+  00:30–01:00 korrigiert und dauerhaft gespeichert.
+- Bereits vorhandene individuelle Pausen bleiben unverändert.
+- Urlaub, Krank und Feiertage werden nicht verändert.
+- Dadurch werden alte/importierte Schichten ohne manuelle Nachbearbeitung
+  wieder mit 30 Minuten Pause berechnet.
+- Beispiel: 21:00–06:00 = 9,0 h brutto, minus 0,5 h Pause = 8,5 h bezahlt.
+
+Hinweis:
+Die bestehende Import-/Dateinamenslogik wurde nicht umgebaut. Build 040 ergänzt
+ausschließlich die automatische Datenreparatur und hebt den PWA-Cache an.

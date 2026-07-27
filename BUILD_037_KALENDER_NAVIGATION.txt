@@ -1,4 +1,4 @@
-SchichtPilot Mobile – Build 037
+SchichtPilot Mobile – Build 040
 
 Behoben:
 - Beim Öffnen einer Schicht aus einem früheren Monat wurde in der
