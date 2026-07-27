@@ -3,8 +3,8 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const CURRENT_BUILD = 40;
-  const FILE_NAME = "SchichtPilot_Backup.spb";
+  const CURRENT_BUILD = 37;
+  const FILE_NAME = "SchichtPilot_Mobile_${date}_${time}.spb";
   const SAFETY_FILE_NAME = "SchichtPilot_Backup_vor_Import.spb";
   const MAX_FILE_SIZE = 10 * 1024 * 1024;
   const ALLOWED_STATUSES = new Set(["Arbeit", "Urlaub", "Krank", "Feiertag"]);
@@ -54,7 +54,7 @@
       application: {
         name: "SchichtPilot",
         platform: "mobile",
-        build: "040"
+        build: "033"
       },
       purpose: filePurpose,
       data: {
@@ -347,7 +347,7 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 040. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 035. Trotzdem fortfahren?`
     );
   }
 
