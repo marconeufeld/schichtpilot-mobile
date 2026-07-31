@@ -1,0 +1,7 @@
+SchichtPilot Mobile DEV 2.6.1 – Build 043
+
+Fehlerbehebung:
+- Automatisches Backup nach dem Löschen wird direkt innerhalb des Lösch-Klicks gestartet.
+- Dialog und Liste werden erst nach dem Start des Downloads aktualisiert.
+- Dadurch wird verhindert, dass iOS/PWA den Download nach DOM-Änderungen blockiert.
+- Service-Worker-Cache auf Build 043 angehoben.

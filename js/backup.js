@@ -69,7 +69,7 @@
       application: {
         name: "SchichtPilot",
         platform: "mobile",
-        build: "042"
+        build: "043"
       },
       purpose: filePurpose,
       data: {
@@ -363,7 +363,7 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 042. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 043. Trotzdem fortfahren?`
     );
   }
 

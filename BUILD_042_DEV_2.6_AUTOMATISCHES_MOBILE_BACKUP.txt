@@ -1,4 +1,4 @@
-SchichtPilot Mobile · DEV 2.6 · Build 042
+SchichtPilot Mobile · DEV 2.6 · Build 043
 
 Neu:
 - Automatisches Mobile-SPB-Backup nach dem Speichern einer neuen Schicht.

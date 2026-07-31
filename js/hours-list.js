@@ -49,7 +49,7 @@ function currentMonthKey() {
 function editShift(id) {
   SchichtPilotStorage.setEditId(id);
   SchichtPilotStorage.clearDraft();
-  window.location.href = "neue-schicht.html?v=042&mode=edit";
+  window.location.href = "neue-schicht.html?v=043&mode=edit";
 }
 
 function openDeleteDialog(id) {
@@ -77,17 +77,32 @@ function closeDeleteDialog() {
 function confirmDelete() {
   if (!pendingDeleteId) return;
 
-  const removed = SchichtPilotStorage.remove(pendingDeleteId);
+  // Die Sicherung muss noch innerhalb des direkten Klick-Ereignisses gestartet
+  // werden. Besonders iOS/PWA kann Downloads blockieren, sobald zuerst Dialog
+  // oder Liste neu gerendert wurden.
+  const deleteId = pendingDeleteId;
+  const removed = SchichtPilotStorage.remove(deleteId);
+
+  if (!removed) {
+    closeDeleteDialog();
+    render();
+    return;
+  }
+
+  let backupSucceeded = false;
+  try {
+    SchichtPilotAutoBackup.create("shift-deleted");
+    backupSucceeded = true;
+  } catch (error) {
+    console.error("Automatisches Mobile-Backup nach dem Löschen fehlgeschlagen.", error);
+  }
+
   closeDeleteDialog();
   render();
 
-  if (!removed) return;
-
-  try {
-    SchichtPilotAutoBackup.create("shift-deleted");
+  if (backupSucceeded) {
     SchichtPilotAutoBackup.showToast("Gelöscht und automatisch für den Desktop gesichert.");
-  } catch (error) {
-    console.error("Automatisches Mobile-Backup nach dem Löschen fehlgeschlagen.", error);
+  } else {
     SchichtPilotAutoBackup.showToast(
       "Eintrag gelöscht. Die automatische Sicherung konnte nicht erstellt werden.",
       "error"
