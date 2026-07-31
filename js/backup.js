@@ -3,7 +3,7 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const CURRENT_BUILD = 41;
+  const CURRENT_BUILD = 42;
   function createBackupFileName(prefix = "SchichtPilot_Mobile") {
     const now = new Date();
     const parts = new Intl.DateTimeFormat("de-DE", {
@@ -69,7 +69,7 @@
       application: {
         name: "SchichtPilot",
         platform: "mobile",
-        build: "041"
+        build: "042"
       },
       purpose: filePurpose,
       data: {
@@ -363,7 +363,7 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 041. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 042. Trotzdem fortfahren?`
     );
   }
 

@@ -1,0 +1,15 @@
+SchichtPilot Mobile · DEV 2.6 · Build 042
+
+Neu:
+- Automatisches Mobile-SPB-Backup nach dem Speichern einer neuen Schicht.
+- Automatisches Mobile-SPB-Backup nach dem Bearbeiten einer Schicht.
+- Automatisches Mobile-SPB-Backup nach dem Löschen einer Schicht.
+- Der manuelle Backup-Bereich bleibt unverändert verfügbar.
+- Bei einem Backupfehler bleiben die lokal gespeicherten Daten erhalten.
+- Der Dateiname enthält Mobile, Datum, Uhrzeit und Sekunden.
+
+Test:
+1. Neue Schicht speichern.
+2. Automatischen Download SchichtPilot_Mobile_...spb prüfen.
+3. Desktop DEV 2.5 öffnen und Importangebot prüfen.
+4. Bearbeiten und Löschen ebenfalls testen.

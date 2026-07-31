@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" href="icons/favicon-64.png" type="image/png">
   <title>Gespeichert · SchichtPilot Mobile</title>
-  <link rel="stylesheet" href="css/main.css?v=041">
+  <link rel="stylesheet" href="css/main.css?v=042">
 </head>
 <body>
   <main class="app saved-page">
@@ -23,29 +23,27 @@
       <h2>Schicht gespeichert</h2>
       <p id="savedText">Die Schicht wurde dauerhaft auf diesem Gerät gespeichert.</p>
 
-      <a class="save-button link-button" href="betriebsstundenliste.html?v=041">Betriebsstundenliste öffnen</a>
+      <a class="save-button link-button" href="betriebsstundenliste.html?v=042">Betriebsstundenliste öffnen</a>
       <button class="save-button secondary-save-button app-exit-button" type="button">Programm beenden</button>
-      <a class="text-button" href="index.html?v=041">Zur Startseite</a>
+      <a class="text-button" href="index.html?v=042">Zur Startseite</a>
     </section>
   </main>
-  <script src="js/storage.js?v=041"></script>
+  <script src="js/storage.js?v=042"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const updated = params.get("updated") === "1";
+    const backupFailed = params.get("backup") === "failed";
     const count = SchichtPilotStorage.readAll().length;
 
     if (updated) {
       document.querySelector(".saved-card h2").textContent = "Änderungen gespeichert";
-      document.getElementById("savedText").textContent =
-        "Die bestehende Schicht wurde aktualisiert. Es wurde keine zweite Schicht angelegt.";
-    } else {
-      document.getElementById("savedText").textContent =
-        count === 1
-          ? "1 Schicht wurde dauerhaft auf diesem Gerät gespeichert."
-          : count + " Schichten sind dauerhaft auf diesem Gerät gespeichert.";
     }
+
+    document.getElementById("savedText").textContent = backupFailed
+      ? `Der Eintrag wurde dauerhaft gespeichert. Die automatische Sicherung konnte jedoch nicht erstellt werden. Insgesamt sind ${count} Einträge vorhanden.`
+      : `Gespeichert und automatisch für den Desktop bereitgestellt. Insgesamt sind ${count} Einträge vorhanden.`;
   </script>
-  <script src="js/app-exit.js?v=041"></script>
-  <script src="js/pwa.js?v=041"></script>
+  <script src="js/app-exit.js?v=042"></script>
+  <script src="js/pwa.js?v=042"></script>
 </body>
 </html>

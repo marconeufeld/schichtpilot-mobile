@@ -82,9 +82,23 @@ saveButton.addEventListener("click", () => {
 
     SchichtPilotStorage.clearDraft();
     SchichtPilotStorage.setEditId(null);
-    window.location.href = editingExisting
-      ? "gespeichert.html?v=035&updated=1"
-      : "gespeichert.html?v=035";
+
+    let backupStatus = "ok";
+    try {
+      SchichtPilotAutoBackup.create(editingExisting ? "shift-updated" : "shift-created");
+    } catch (backupError) {
+      console.error("Automatisches Mobile-Backup fehlgeschlagen.", backupError);
+      backupStatus = "failed";
+    }
+
+    const target = editingExisting
+      ? `gespeichert.html?v=042&updated=1&backup=${backupStatus}`
+      : `gespeichert.html?v=042&backup=${backupStatus}`;
+
+    // Der kurze Aufschub gibt dem Browser Zeit, den Download zu übernehmen.
+    window.setTimeout(() => {
+      window.location.href = target;
+    }, 350);
   } catch (error) {
     previewMessage.textContent =
       error instanceof Error

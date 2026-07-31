@@ -49,7 +49,7 @@ function currentMonthKey() {
 function editShift(id) {
   SchichtPilotStorage.setEditId(id);
   SchichtPilotStorage.clearDraft();
-  window.location.href = "neue-schicht.html?v=041&mode=edit";
+  window.location.href = "neue-schicht.html?v=042&mode=edit";
 }
 
 function openDeleteDialog(id) {
@@ -76,9 +76,23 @@ function closeDeleteDialog() {
 
 function confirmDelete() {
   if (!pendingDeleteId) return;
-  SchichtPilotStorage.remove(pendingDeleteId);
+
+  const removed = SchichtPilotStorage.remove(pendingDeleteId);
   closeDeleteDialog();
   render();
+
+  if (!removed) return;
+
+  try {
+    SchichtPilotAutoBackup.create("shift-deleted");
+    SchichtPilotAutoBackup.showToast("Gelöscht und automatisch für den Desktop gesichert.");
+  } catch (error) {
+    console.error("Automatisches Mobile-Backup nach dem Löschen fehlgeschlagen.", error);
+    SchichtPilotAutoBackup.showToast(
+      "Eintrag gelöscht. Die automatische Sicherung konnte nicht erstellt werden.",
+      "error"
+    );
+  }
 }
 
 function setCardOpen(card, open) {
