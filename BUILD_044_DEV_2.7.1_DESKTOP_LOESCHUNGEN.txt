@@ -1,0 +1,7 @@
+SchichtPilot Mobile · DEV 2.7.1 · Build 044
+
+- Desktop-Backups werden beim intelligenten Zusammenführen als vollständiger Datenstand behandelt.
+- Auf dem Desktop gelöschte Schichten werden dadurch auch auf Mobile entfernt.
+- Importvorschau zeigt zusätzlich die Anzahl der zu entfernenden Schichten.
+- Vor jedem Import kann weiterhin automatisch eine Sicherheitskopie erstellt werden.
+- Mobile-zu-Mobile-Importe verwenden weiterhin die bisherige dublettenfreie Zusammenführung.

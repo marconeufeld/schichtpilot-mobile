@@ -12,14 +12,14 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" href="icons/favicon-64.png" type="image/png">
   <title>Datensicherung · SchichtPilot</title>
-  <link rel="stylesheet" href="css/main.css?v=043">
+  <link rel="stylesheet" href="css/main.css?v=044">
 </head>
 <body>
   <main class="app backup-page">
     <header class="page-header">
-      <a class="back-link" href="index.html?v=043" aria-label="Zurück zur Startseite">‹ Zurück</a>
+      <a class="back-link" href="index.html?v=044" aria-label="Zurück zur Startseite">‹ Zurück</a>
       <div>
-        <p class="eyebrow">Build 043</p>
+        <p class="eyebrow">Build 044</p>
         <h1>Datensicherung</h1>
       </div>
     </header>
@@ -92,6 +92,7 @@
           <div><span>Neu</span><strong id="mergeNewCount">0</strong></div>
           <div><span>Vorhanden</span><strong id="mergeExistingCount">0</strong></div>
           <div><span>Abweichend</span><strong id="mergeUpdatedCount">0</strong></div>
+          <div id="mergeDeletedRow"><span>Auf Quelle gelöscht</span><strong id="mergeDeletedCount">0</strong></div>
           <div><span>Endbestand</span><strong id="mergeFinalCount">0</strong></div>
         </div>
 
@@ -99,7 +100,7 @@
 
         <label class="backup-option">
           <input id="downloadSafetyCopy" type="checkbox" checked>
-          <span>Vor dem vollständigen Ersetzen automatisch eine Sicherheitskopie herunterladen</span>
+          <span>Vor jedem Import automatisch eine Sicherheitskopie herunterladen</span>
         </label>
 
         <div class="backup-actions">
@@ -124,8 +125,8 @@
     <div id="backupMessage" class="backup-message" role="status" aria-live="polite" hidden></div>
   </main>
 
-  <script src="js/storage.js?v=043"></script>
-  <script src="js/backup.js?v=043"></script>
-  <script src="js/pwa.js?v=043"></script>
+  <script src="js/storage.js?v=044"></script>
+  <script src="js/backup.js?v=044"></script>
+  <script src="js/pwa.js?v=044"></script>
 </body>
 </html>

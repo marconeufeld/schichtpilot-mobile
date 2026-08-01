@@ -182,7 +182,7 @@ window.SchichtPilotStorage = (() => {
 
     if (!start || !end) return null;
 
-    // Build 043: automatische Reparatur älterer/importierter Arbeitsschichten.
+    // Build 044: automatische Reparatur älterer/importierter Arbeitsschichten.
     // Fehlende oder identische Pausenzeiten (häufig 00:00–00:00) erhalten
     // wieder die SchichtPilot-Standardpause 00:30–01:00.
     // Abweichende, bewusst eingetragene Pausen bleiben unverändert.
@@ -464,6 +464,65 @@ window.SchichtPilotStorage = (() => {
     };
   }
 
+  // DEV 2.7.1: Ein Desktop-Backup ist ein vollständiger Datenstand.
+  // Beim intelligenten Zusammenführen werden deshalb auch Schichten entfernt,
+  // die auf dem Desktop bereits gelöscht wurden. IDs haben Vorrang; ältere
+  // Backups ohne stabile ID werden zusätzlich über den bisherigen Schlüssel erkannt.
+  function analyzeAuthoritativeSnapshot(importedShifts) {
+    if (!Array.isArray(importedShifts)) {
+      throw new Error("Die Sicherungsdatei enthält keine gültige Schichtliste.");
+    }
+
+    const existing = readAll();
+    const imported = sanitizeShiftList(importedShifts).shifts;
+    const existingById = new Map(existing.map(shift => [shift.id, shift]));
+    const existingByKey = new Map(existing.map(shift => [shiftMergeKey(shift), shift]));
+    const matchedExistingIds = new Set();
+
+    let added = 0;
+    let identical = 0;
+    let updated = 0;
+
+    const synced = imported.map(importedShift => {
+      let existingShift = existingById.get(importedShift.id) || null;
+      if (!existingShift) existingShift = existingByKey.get(shiftMergeKey(importedShift)) || null;
+
+      if (!existingShift) {
+        added += 1;
+        return importedShift;
+      }
+
+      matchedExistingIds.add(existingShift.id);
+      if (shiftContentSignature(existingShift) === shiftContentSignature(importedShift)) {
+        identical += 1;
+      } else {
+        updated += 1;
+      }
+
+      return {
+        ...importedShift,
+        id: existingShift.id || importedShift.id,
+        createdAt: existingShift.createdAt || importedShift.createdAt
+      };
+    });
+
+    const deleted = existing.filter(shift => !matchedExistingIds.has(shift.id)).length;
+
+    return {
+      added,
+      identical,
+      updated,
+      deleted,
+      finalCount: synced.length,
+      synced
+    };
+  }
+
+  function syncFromAuthoritativeSnapshot(importedShifts) {
+    const analysis = analyzeAuthoritativeSnapshot(importedShifts);
+    return writeAll(analysis.synced);
+  }
+
   function mergeAll(importedShifts) {
     const analysis = analyzeMerge(importedShifts);
     return writeAll(analysis.merged);
@@ -601,6 +660,8 @@ window.SchichtPilotStorage = (() => {
     readAll,
     replaceAll,
     analyzeMerge,
+    analyzeAuthoritativeSnapshot,
+    syncFromAuthoritativeSnapshot,
     mergeAll,
     save,
     getById,

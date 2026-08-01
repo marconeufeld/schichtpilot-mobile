@@ -92,8 +92,8 @@ saveButton.addEventListener("click", () => {
     }
 
     const target = editingExisting
-      ? `gespeichert.html?v=043&updated=1&backup=${backupStatus}`
-      : `gespeichert.html?v=043&backup=${backupStatus}`;
+      ? `gespeichert.html?v=044&updated=1&backup=${backupStatus}`
+      : `gespeichert.html?v=044&backup=${backupStatus}`;
 
     // Der kurze Aufschub gibt dem Browser Zeit, den Download zu übernehmen.
     window.setTimeout(() => {

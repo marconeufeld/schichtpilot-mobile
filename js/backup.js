@@ -3,7 +3,7 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const CURRENT_BUILD = 42;
+  const CURRENT_BUILD = 44;
   function createBackupFileName(prefix = "SchichtPilot_Mobile") {
     const now = new Date();
     const parts = new Intl.DateTimeFormat("de-DE", {
@@ -43,6 +43,11 @@
 
   let pendingImport = null;
   let pendingMeta = null;
+  let pendingAnalysis = null;
+
+  function isDesktopBackup(meta) {
+    return String(meta?.platform || "").trim().toLowerCase() === "desktop";
+  }
 
   function showMessage(message, type = "success") {
     backupMessage.textContent = message;
@@ -69,7 +74,7 @@
       application: {
         name: "SchichtPilot",
         platform: "mobile",
-        build: "043"
+        build: "044"
       },
       purpose: filePurpose,
       data: {
@@ -266,7 +271,11 @@
   function showPreview(file, shifts, meta) {
     pendingImport = shifts;
     pendingMeta = meta;
-    const mergeAnalysis = window.SchichtPilotStorage.analyzeMerge(shifts);
+    const authoritative = isDesktopBackup(meta);
+    const mergeAnalysis = authoritative
+      ? window.SchichtPilotStorage.analyzeAuthoritativeSnapshot(shifts)
+      : window.SchichtPilotStorage.analyzeMerge(shifts);
+    pendingAnalysis = mergeAnalysis;
 
     const backupBuild = parseBuildNumber(meta.build);
     const isNewerBuild = backupBuild != null && backupBuild > CURRENT_BUILD;
@@ -280,7 +289,16 @@
     document.getElementById("mergeNewCount").textContent = String(mergeAnalysis.added);
     document.getElementById("mergeExistingCount").textContent = String(mergeAnalysis.identical);
     document.getElementById("mergeUpdatedCount").textContent = String(mergeAnalysis.updated);
+    const deletedRow = document.getElementById("mergeDeletedRow");
+    const deletedCount = document.getElementById("mergeDeletedCount");
+    if (deletedRow && deletedCount) {
+      deletedRow.hidden = !authoritative;
+      deletedCount.textContent = String(authoritative ? mergeAnalysis.deleted : 0);
+    }
     document.getElementById("mergeFinalCount").textContent = String(mergeAnalysis.finalCount);
+    mergeButton.textContent = authoritative
+      ? "Desktop-Datenstand intelligent übernehmen"
+      : "Mit vorhandenen Daten zusammenführen";
 
     const duplicateWarning = document.getElementById("duplicateWarning");
     const duplicateParts = [];
@@ -310,6 +328,7 @@
     hideMessage();
     pendingImport = null;
     pendingMeta = null;
+    pendingAnalysis = null;
     importPreview.hidden = true;
     versionWarning.hidden = true;
 
@@ -363,24 +382,32 @@
     if (backupBuild == null || backupBuild <= CURRENT_BUILD) return true;
 
     return window.confirm(
-      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 043. Trotzdem fortfahren?`
+      `Dieses Backup stammt aus Build ${backupBuild}, installiert ist Build 044. Trotzdem fortfahren?`
     );
   }
 
   function importMerged() {
     if (!pendingImport || !confirmNewerBuildIfNeeded()) return;
 
-    const analysis = window.SchichtPilotStorage.analyzeMerge(pendingImport);
+    const authoritative = isDesktopBackup(pendingMeta);
+    const analysis = pendingAnalysis || (authoritative
+      ? window.SchichtPilotStorage.analyzeAuthoritativeSnapshot(pendingImport)
+      : window.SchichtPilotStorage.analyzeMerge(pendingImport));
 
-    if (!window.confirm(
-      `Dublettenfrei zusammenführen?\n\n` +
-      `${analysis.added} neue Schichten\n` +
-      `${analysis.identical} bereits vorhandene Schichten\n` +
-      `${analysis.updated} Schichten mit abweichenden Details\n` +
-      `Endbestand: ${analysis.finalCount}`
-    )) {
-      return;
-    }
+    const confirmation = authoritative
+      ? `Desktop-Datenstand intelligent übernehmen?\n\n` +
+        `${analysis.added} neue Schichten\n` +
+        `${analysis.identical} unveränderte Schichten\n` +
+        `${analysis.updated} geänderte Schichten\n` +
+        `${analysis.deleted} auf dem Desktop gelöschte Schichten werden auch mobil entfernt\n` +
+        `Endbestand: ${analysis.finalCount}`
+      : `Dublettenfrei zusammenführen?\n\n` +
+        `${analysis.added} neue Schichten\n` +
+        `${analysis.identical} bereits vorhandene Schichten\n` +
+        `${analysis.updated} Schichten mit abweichenden Details\n` +
+        `Endbestand: ${analysis.finalCount}`;
+
+    if (!window.confirm(confirmation)) return;
 
     try {
       let safetyCount = null;
@@ -388,19 +415,24 @@
         safetyCount = downloadCurrentDataAsSafetyCopy();
       }
 
-      const saved = window.SchichtPilotStorage.mergeAll(pendingImport);
+      const saved = authoritative
+        ? window.SchichtPilotStorage.syncFromAuthoritativeSnapshot(pendingImport)
+        : window.SchichtPilotStorage.mergeAll(pendingImport);
       updateCount();
 
       const safetyText = safetyCount == null
         ? ""
         : ` Sicherheitskopie mit ${safetyCount} Einträgen wurde heruntergeladen.`;
 
-      showMessage(
-        `Zusammenführen abgeschlossen: ${analysis.added} neu, ` +
-        `${analysis.identical} bereits vorhanden, ${analysis.updated} aktualisiert. ` +
-        `Jetzt sind ${saved.length} eindeutige Einträge gespeichert.${safetyText}`,
-        "success"
-      );
+      const resultText = authoritative
+        ? `Desktop-Datenstand übernommen: ${analysis.added} neu, ` +
+          `${analysis.updated} aktualisiert, ${analysis.deleted} entfernt. ` +
+          `Jetzt sind ${saved.length} Einträge gespeichert.${safetyText}`
+        : `Zusammenführen abgeschlossen: ${analysis.added} neu, ` +
+          `${analysis.identical} bereits vorhanden, ${analysis.updated} aktualisiert. ` +
+          `Jetzt sind ${saved.length} eindeutige Einträge gespeichert.${safetyText}`;
+
+      showMessage(resultText, "success");
     } catch (error) {
       showMessage(
         error instanceof Error ? error.message : "Die Daten konnten nicht importiert werden.",
