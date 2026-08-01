@@ -3,7 +3,7 @@
 
   const FORMAT_NAME = "SchichtPilot Backup";
   const FORMAT_VERSION = 1;
-  const BUILD = "044";
+  const BUILD = "045";
 
   function fileName() {
     const now = new Date();

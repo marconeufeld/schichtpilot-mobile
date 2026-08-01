@@ -1,4 +1,4 @@
-SchichtPilot Mobile · DEV 2.7.1 · Build 044
+SchichtPilot Mobile · DEV 2.7.1 · Build 045
 
 - Desktop-Backups werden beim intelligenten Zusammenführen als vollständiger Datenstand behandelt.
 - Auf dem Desktop gelöschte Schichten werden dadurch auch auf Mobile entfernt.

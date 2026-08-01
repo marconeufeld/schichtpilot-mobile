@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" href="icons/favicon-64.png" type="image/png">
   <title>Gespeichert · SchichtPilot Mobile</title>
-  <link rel="stylesheet" href="css/main.css?v=044">
+  <link rel="stylesheet" href="css/main.css?v=045">
 </head>
 <body>
   <main class="app saved-page">
@@ -23,12 +23,12 @@
       <h2>Schicht gespeichert</h2>
       <p id="savedText">Die Schicht wurde dauerhaft auf diesem Gerät gespeichert.</p>
 
-      <a class="save-button link-button" href="betriebsstundenliste.html?v=044">Betriebsstundenliste öffnen</a>
+      <a class="save-button link-button" href="betriebsstundenliste.html?v=045">Betriebsstundenliste öffnen</a>
       <button class="save-button secondary-save-button app-exit-button" type="button">Programm beenden</button>
-      <a class="text-button" href="index.html?v=044">Zur Startseite</a>
+      <a class="text-button" href="index.html?v=045">Zur Startseite</a>
     </section>
   </main>
-  <script src="js/storage.js?v=044"></script>
+  <script src="js/storage.js?v=045"></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const updated = params.get("updated") === "1";
@@ -43,7 +43,7 @@
       ? `Der Eintrag wurde dauerhaft gespeichert. Die automatische Sicherung konnte jedoch nicht erstellt werden. Insgesamt sind ${count} Einträge vorhanden.`
       : `Gespeichert und automatisch für den Desktop bereitgestellt. Insgesamt sind ${count} Einträge vorhanden.`;
   </script>
-  <script src="js/app-exit.js?v=044"></script>
-  <script src="js/pwa.js?v=044"></script>
+  <script src="js/app-exit.js?v=045"></script>
+  <script src="js/pwa.js?v=045"></script>
 </body>
 </html>

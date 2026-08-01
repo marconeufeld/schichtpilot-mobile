@@ -1,0 +1,8 @@
+SchichtPilot Mobile · DEV 2.8 · Build 045
+
+- Startdialog zur Prüfung eines Desktop-Backups
+- intelligenter Vergleich: neu, geändert, gelöscht, unverändert, Endbestand
+- Desktop-Datenstand kann direkt auf der Startseite übernommen werden
+- gleiche Desktop-Löschlogik wie in Build 044
+- iOS-Einschränkung transparent: einmalige Dateiauswahl ist erforderlich
+- Service-Worker-Cache und Versionsparameter auf Build 045 erhöht

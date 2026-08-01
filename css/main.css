@@ -2376,3 +2376,136 @@ input[type="time"]::-webkit-datetime-edit {
   color: var(--text);
   font-size: 21px;
 }
+
+
+/* Build 045: intelligente Desktop-Backup-Prüfung beim Mobile-Start */
+.startup-sync-open,
+.startup-sync-open body {
+  overflow: hidden;
+}
+
+.startup-sync-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: max(18px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
+}
+
+.startup-sync-dialog[hidden] {
+  display: none;
+}
+
+.startup-sync-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 9, 22, 0.76);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.startup-sync-card {
+  position: relative;
+  width: min(100%, 460px);
+  max-height: calc(100dvh - 36px);
+  overflow: auto;
+  padding: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 24px;
+  background: #17243b;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.startup-sync-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.2);
+  font-size: 27px;
+}
+
+.startup-sync-card h2 {
+  margin: 4px 0 10px;
+  font-size: 27px;
+}
+
+.startup-sync-copy,
+.startup-sync-note {
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+.startup-sync-details {
+  display: grid;
+  gap: 0;
+  margin: 18px 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.22);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.startup-sync-details > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.startup-sync-details > div:last-child {
+  border-bottom: 0;
+}
+
+.startup-sync-details span {
+  color: #94a3b8;
+}
+
+.startup-sync-details strong {
+  max-width: 58%;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.startup-sync-message {
+  margin: 14px 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.16);
+  color: #dbeafe;
+}
+
+.startup-sync-message.success {
+  background: rgba(16, 185, 129, 0.16);
+  color: #bbf7d0;
+}
+
+.startup-sync-message.warning {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fde68a;
+}
+
+.startup-sync-message.error {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fecaca;
+}
+
+.startup-sync-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.startup-sync-actions .main-button,
+.startup-sync-actions .text-button {
+  width: 100%;
+  margin: 0;
+}
+
+.startup-sync-note {
+  margin: 16px 0 0;
+  font-size: 13px;
+  text-align: center;
+}
